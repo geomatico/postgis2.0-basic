@@ -1,0 +1,1554 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+    <section>
+        <h1>
+            <br>
+        </h1>
+        <h1>Bases de Datos Geográficas<br>
+        </h1>
+        <div>
+            <br>
+        </div>
+        <div>Teoría de bases de datos<br>
+        </div>
+    </section>
+    <section>
+        <h2>Objetivos</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div class="absolute-element" style="position: absolute; width: 968px; height: 186px; z-index: 4; left: 35px; top: 248px;">
+            <ul>
+
+                <li>Investigar ventajas e inconvenientes de las bases de datos</li>
+                <li>Acercar al alumno al modelado de bases de datos</li>
+                <li>Implementar el modelo de datos entidad relación en un modelo relacional</li>
+            </ul>
+        </div>
+    </section>
+    <section>
+        <h2>Problemas</h2>
+        <div>
+            <br>
+        </div>
+        <div class="absolute-element" style="position: absolute; width: 968px; height: 186px; z-index: 4; left: 32px; top: 264px;">
+            <ul>
+
+                <li>Manejo de grandes volúmenes de datos</li>
+                <li>Complejidad en la extracción de estos datos</li>
+                <li>Concurrencia en el acceso a datos, accesos simultáneos por varios usuarios</li>
+            </ul>
+        </div>
+    </section>
+    <section>
+        <br>
+        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135118/babel-brueghel-2.jpg" class="absolute-element" style="position: absolute; max-height: none; max-width: none; width: 819.861175564676px; height: 675.048629293602px; z-index: 4; left: 51px; top: -7px;">
+    </section>
+    <section>
+        <h2>Limitaciones de archivos</h2>
+        <div>
+            <br>
+        </div>
+        <div class="absolute-element" style="position: absolute; width: 968px; height: 232px; z-index: 4; left: 24px; top: 246px;">
+            <ul>
+
+                <li>Limitaciones en la cantidad de datos que era posible almacenar</li>
+                <li>Rendimiento de lectura de estos archivos</li>
+                <li>Bloqueo de los archivos con el acceso por usuario</li>
+                <li>Imposibilidad de gestionar el versionado de manera sencilla</li>
+            </ul>
+        </div>
+    </section>
+    <section>
+        <h1 class="absolute-element" style="position: absolute; width: 779px; height: 122px; z-index: 4; left: 108px; top: 253px;">¡¡Fragmentación!!</h1>
+    </section>
+    <section>
+        <section>
+            <p class="absolute-element" style="position: absolute; width: 968px; height: 186px; z-index: 4; left: -14px; top: 225px;">Con el desarrollo de la tecnología se <b>
+                <i>democratiza</i>
+                </b> el uso de ordenadores potentes que permiten poner a disposición de las organizaciones equipos potentes que gestionen de manera eficiente las base de datos mediante&nbsp;</p>
+            </section>
+            <section>
+                <h2>
+                    <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135126/viejo_cacharro.jpg" style="width: 818.9432578026754px; height: 640.04509260041px; max-height: none; max-width: none;">
+                    <br>
+                </h2>
+            </section>
+        </section>
+        <section>
+            <h2>
+                <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135127/servidor-web.jpg">
+                <br>
+            </h2>
+        </section>
+        <section>
+            <h2>
+                <span>Base de datos</span>
+                <br>
+            </h2>
+            <div>
+                <br>
+                <br>
+            </div>
+            <div class="absolute-element" style="position: absolute; width: 951.42175066313px; height: 211px; z-index: 4; left: 3px; top: 258px; max-height: none; max-width: none;">
+                <ul>
+                    <li>Una gran masa de datos relacionados entre si pertenecientes a un mismo contexto</li>
+                    <li>Colección estructurada almacenada en un sistema informático</li>
+                </ul>
+            </div>
+        </section>
+        <section>
+            <h2>OBJETIVO</h2>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div class="absolute-element" style="position: absolute; width: 944px; height: 46px; z-index: 4; left: 9px; top: 303px;">Aportar a la organización a la que sirve la <font style="font-size: 54px;">
+                <b>información necesaria</b>
+            </font>
+            <br>
+        </div>
+    </section>
+    <section>
+        <h2>Funciones<br>
+        </h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <ul>
+                <li>
+                    <span>Recogida</span>
+                    <br>
+                </li>
+                <li>Almacenamiento</li>
+                <li>Procesamiento</li>
+                <li>Recuperación</li>
+            </ul>
+        </div>
+    </section>
+    <section>
+        <section>
+            <h2>Algunas propiedades</h2>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <ul>
+                </ul>
+                <span style="text-align: left;">Estructuradas de manera </span>
+                <i style="text-align: left;">
+                    <b>independiente</b>
+                </i>
+                <span style="text-align: left;"> de las aplicaciones y del soporte de almacenamiento que las contiene</span>
+                <br>
+            </div>
+        </section>
+        <section>&nbsp;<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135141/cs-images-2-tier.gif" class="absolute-element" style="position: absolute; max-height: none; max-width: none; width: 384px; height: 277px; z-index: 4; left: 42px; top: 177px;">
+            <br>
+            <div>2 Capas &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3 Capas<h2 class="absolute-element" style="position: absolute; width: 424px; height: 316px; z-index: 4; left: 495px; top: 205px;">
+                <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135139/cs-images-3-tier.gif">
+                <br>
+            </h2>
+        </div>
+    </section>
+    <section>
+        <h2>
+            <br>
+        </h2>
+        <div>
+            <span style="text-align: left;">Deben presentar la&nbsp;</span>
+            <i style="text-align: left;">
+                <b>menor redundancia</b>
+            </i>
+            <span style="text-align: left;">&nbsp;</span>
+            <span style="text-align: left;">posible</span>
+            <br>
+        </div>
+        <div>
+            <span style="text-align: left;">
+                <br>
+            </span>
+        </div>
+        <div class="absolute-element" style="position: absolute; width: 934px; height: 490px; z-index: 4; left: 11px; top: 171px;">
+            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135151/quintillizas-idecc81nticas-dionne-jpg.png">
+            <span style="text-align: left;">
+                <br>
+            </span>
+        </div>
+    </section>
+    <section>
+        <h2>
+            <br>
+        </h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div class="absolute-element" style="position: absolute; width: 746px; height: 46px; z-index: 4; left: 93px; top: 38px;">
+            <span style="text-align: left;">Son</span>
+            <span style="text-align: left;">&nbsp;</span>
+            <i style="text-align: left;">
+                <b>compartidas</b>
+            </i>
+            <span style="text-align: left;">&nbsp;</span>
+            <span style="text-align: left;">por todos los usuarios de una red</span>
+            <br>
+        </div>
+        <div class="absolute-element" style="position: absolute; width: 949px; height: 634px; z-index: 4; left: 3px; top: 90px;">
+            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135152/SS10061.jpg" style="width: 847.0860183466438px; height: 562.3174179761837px; max-height: none; max-width: none;">
+            <span style="text-align: left;">
+                <br>
+            </span>
+        </div>
+    </section>
+</section>
+<section>
+    <h2>Objetivos generales de las BBDD</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <ul>
+            <li>
+                <i>Abstracción</i> de la información<br>
+            </li>
+            <li>
+                <i>Redundancia mínima</i>
+            </li>
+            <li>
+                <i>Seguridad</i>
+            </li>
+            <li>
+                <i>Integridad</i>
+            </li>
+            <li>
+                <i>Respaldo y recuperación</i>
+            </li>
+            <li>Control de la <i>concurrencia</i>, <i>versionado</i>
+        </li>
+        <li>Tiempo de <i>respuesta</i>
+    </li>
+    <li>...</li>
+</ul>
+</div>
+</section>
+<section>
+    <h2>
+        <span>Modelo de datos</span>
+        <br>
+    </h2>
+    <div>
+        <span>
+            <br>
+        </span>
+    </div>
+    <div>
+        <span>
+            <br>
+        </span>
+    </div>
+    <div>
+        <span>
+            <br>
+        </span>
+    </div>
+    <div>Encargado de reflejar mediante un conjunto de <b>REGLAS</b> y <b>CONCEPTOS</b>&nbsp;en la estructura de datos y <b>OPERACIONES</b> aplicables sobre estos<br>
+    </div>
+</section>
+<section>
+    <h2>Modelo de datos</h2>
+    <div>
+        <br>
+        <br>
+    </div>
+    <div class="absolute-element" style="position: absolute; width: 968px; height: 186px; z-index: 4; left: 9px; top: 249px;">
+        <ul>
+            <font color="#ffffff">
+                <li>Define el <b>
+                    <i>tipo de datos</i>
+                </b> que hay en la base de datos y la forma en que se <b>
+                <i>relacionan</i>
+            </b>
+        </li>
+        <li>Aplica <b>
+            <i>restricciones</i>
+            </b> entre estos datos</li>
+            <li>Define las <b>
+                <i>operaciones</i>
+                </b> de manipulación de los datos</li>
+            </font>
+        </ul>
+    </div>
+</section>
+<section>
+    <h2>
+        <br>
+    </h2>
+    <h2>
+        <br>
+    </h2>
+    <h2>
+        <br>
+    </h2>
+    <h2>Modelo de datos relacional E-R</h2>
+</section>
+<section>
+    <h2>Modelo de datos relacional</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>Una base de datos relacional es un conjunto de una o más <b>tablas</b> estructuradas en <b>registros</b> (filas) y <b>campos</b> (columnas)<br>
+    </div>
+</section>
+<section>
+    <h2>Conceptos básicos</h2>
+    <div>
+        <br>
+    </div>
+    <div class="absolute-element" style="position: absolute; width: 222px; height: 186px; z-index: 4; left: 379px; top: 256px;">
+        <div>
+            <ul>
+                <li>
+                    <span style="text-align: center;">Tablas</span>
+                    <br>
+                </li>
+                <li>
+                    <span style="text-align: center;">Columnas</span>
+                    <br>
+                </li>
+                <li>
+                    <span style="text-align: center;">Registros</span>
+                    <br>
+                </li>
+                <li>
+                    <span style="text-align: center;">Relaciones</span>
+                    <br>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>Tablas</h2>
+    <div>Unidad que almacena la información referente a un echo. Guarda lo relativo a un concepto definido<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135168/fig2.png" style="width: 761.7157235473177px; height: 427.1061005579698px; max-height: none; max-width: none;">
+        <br>
+    </div>
+</section>
+<section>
+    <h2>Columnas</h2>
+    <div>Almacena la información referente a propiedades o atributos determinados del echo conocido<br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div class="absolute-element" style="position: absolute; width: 800px; height: 468.211317418214px; z-index: 4; left: 83px; top: 206px; max-height: none; max-width: none;">
+        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135170/columna.png" style="width: 791.7433219363999px; height: 444.47303247662586px; max-height: none; max-width: none;">
+        <br>
+    </div>
+</section>
+<section>
+    <h2>Registros</h2>
+    <div>Asigna un valor determinado dentro de un rango para cada columna del echo conocido. Define la unidad mínima de información asociada al contexto<br>
+    </div>
+    <div class="absolute-element" style="position: absolute; width: 714px; height: 419px; z-index: 4; left: 96px; top: 241px;">
+        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135171/registro.png" style="width: 748.3638830770777px; height: 418.6825815482439px; max-height: none; max-width: none;">
+        <br>
+    </div>
+</section>
+<section>
+    <h2>Relaciones</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>Determina el comportamiento de unos echos con otros, de unas tablas con las otras.<br>
+    </div>
+</section>
+<section>
+    <section>
+        <h2>Modelización</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Construir un <b>
+            <i>modelo</i>
+        </b> de la realidad, que <i>
+        <b>simplifique</b>
+    </i> la “complejidad infinita de ésta”, y permita estudiar una “realidad simplificada”, de tal forma que la información sobre la ejecución de estos escenarios en el modelo sirva de apoyo para la toma de decisiones en base a lo que sucedería en el mundo real.<br>
+</div>
+</section>
+<section>
+    <h2>Modelización<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135219/modelizaci_n.png" style="width: 691.7659557512239px; height: 518.6878865880317px; max-height: none; max-width: none;">
+    </h2>
+</section>
+</section>
+<section>
+    <h2>
+        <br>
+    </h2>
+    <h2>
+        <br>
+    </h2>
+    <h2>
+        <br>
+    </h2>
+    <h2>
+        <span>Conceptos deL modelo de datos</span>
+        <br>
+    </h2>
+</section>
+<section>
+    <h2>Entidad</h2>
+    <div class="absolute-element" style="position: absolute; width: 967px; height: 276px; z-index: 4; left: -4px; top: 210px;">Algunos ejemplos de entidad son un accidente geográfico, un edificio o una calle. También son entidades otros elementos del mundo real de interés, menos tangibles pero igualmente diferenciales del resto de objetos; por ejemplo, un punto de interés, un tipo de usuario, un archivo de imagen, etc.<br>
+    </div>
+</section>
+<section>
+    <h2>Entidad</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>
+            <br>
+        </div>
+        <div>PARQUE NATURAL →Entidad</div>
+        <div>OFICINA CORREO →Entidad</div>
+        <div>ACCIDENTE GEOGRÁFICO →Entidad</div>
+    </div>
+</section>
+<section>
+    <h2>Entidad</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>Las entidades se representan con un rectángulo. El nombre de la entidad se escribe en mayúsculas dentro del rectángulo.<br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135222/entidad.png" style="width: 559.901614971743px; height: 152.311228763098px; max-height: none; max-width: none;">
+        <br>
+    </div>
+</section>
+<section>
+    <h2>entidad</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div class="absolute-element" style="position: absolute; width: 949px; height: 547px; z-index: 4; left: 2px; top: 122px;">
+        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135198/fig2.png">
+        <br>
+    </div>
+</section>
+<section>
+    <h2>Entidad débil</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>Una entidad débil es una entidad cuyos atributos no la identifican completamente, sino que sólo la identifican de forma parcial. Esta entidad debe participar en una interrelación que ayuda a identificarla.<br>
+    </div>
+</section>
+<section>
+    <h2>Entidad débil</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>Curso → &nbsp;Profesor</div>
+    <div>
+        <span>Localidad → &nbsp;Provincia</span>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135223/entidad_debil.png" style="width: 400.8179675491766px; height: 198.73032690633406px; max-height: none; max-width: none;">
+        <br>
+    </div>
+</section>
+<section>
+    <h2>Dominio y valor</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>El conjunto de posibles valores que puede tomar una cierta característica se denomina dominio<br>
+    </div>
+</section>
+<section>
+    <h2>dominio y valor</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>Inglés &nbsp;→ pertenece al dominio de Idiomas</div>
+        <div>33000ha → pertenece al dominio de unidades de medida de superficie</div>
+    </div>
+</section>
+<section>
+    <h2>dominio y valor</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135224/dominio.png" style="width: 579.051136704763px; height: 184.36251081438004px; max-height: none; max-width: none;">
+        <br>
+    </div>
+</section>
+<section>
+    <h2>atributo</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div class="absolute-element" style="position: absolute; width: 968px; height: 139px; z-index: 4; left: -5px; top: 273px;">Cada una de las propiedades o características que tiene un tipo de entidad o un tipo de relación se denomina atributo; estos toman valores de uno o varios dominios.<br>
+    </div>
+</section>
+<section>
+    <h2>Atributo</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div class="absolute-element" style="position: absolute; width: 261px; height: 355px; z-index: 4; left: 351px; top: 214px;">
+        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135225/dominio-valor.png" style="width: 221.30231142420254px; height: 316.4659590902421px; max-height: none; max-width: none;">
+        <br>
+    </div>
+</section>
+<section>
+    <h2>atributo</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div class="absolute-element" style="position: absolute; width: 952px; height: 547px; z-index: 4; left: 3px; top: 111px;">
+        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135207/columna.png">
+        <br>
+    </div>
+</section>
+<section>
+    <h2 style="font-style: normal; font-variant: normal;">Atributo</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <ul>
+            <li>
+                <b>Atributo multivaluado</b>: atributos de una entidad que pueden tener más de un valor.</li>
+                <li>
+                    <b>Atributo optativo</b>: aquel que puede admitir valores nulos</li>
+                    <li>
+                        <b>Atributo identificador</b>: Uno o más campos cuyos valores son únicos en cada ejemplar de una entidad</li>
+                        <ol>
+                            <li>Deben distinguir a cada ejemplar tendiendo en cuenta las entidades que utiliza el modelo</li>
+                            <li>Todos los ejemplares de un entidad deben tener el mismo identificador</li>
+                        </ol>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h2>Atributo</h2>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <div>Ejemplos de atributo:</div>
+                    <div>
+                        <br>
+                    </div>
+                    <div>Parque Natural → &nbsp;Superficie</div>
+                    <div>Parque Natural → Nombre</div>
+                    <div>Oficina → Teléfono</div>
+                </div>
+            </section>
+            <section>
+                <h2 style="font-style: normal; font-variant: normal;">ATRIBUTO</h2>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135226/dominio.png" style="width: 579.051136704763px; height: 184.36251081438004px; max-height: none; max-width: none;">
+                    <br>
+                </div>
+            </section>
+            <section>
+                <h2>Atributo</h2>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div>Ejemplos de atributo multivaluado:<br>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <ul>
+                        <li>Curso → Idioma</li>
+                        <li>Oficina → Teléfono</li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h2>Atributo multivaluado</h2>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135227/multivaluado.png" style="width: 462.11243536777243px; height: 195.41467703896006px; max-height: none; max-width: none;">
+                    <br>
+                </div>
+            </section>
+            <section>
+                <h2>Atributo</h2>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div>Ejemplos de atributo opcional:<br>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            <span style="text-align: center;">Cliente → e-mail</span>
+                            <br>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h2>Atributo</h2>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <div>Ejemplos de atributo identificador:</div>
+                    <div>
+                        <br>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>
+                                <span style="text-align: center;">Cliente → numero identificación</span>
+                                <br>
+                            </li>
+                        </ul>
+                        <div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div>Pueden existir varios atributos identificadores<br>
+                </div>
+            </section>
+            <section>
+                <h2>Atributo identificador</h2>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div class="absolute-element" style="position: absolute; width: 721px; height: 218px; z-index: 4; left: 128px; top: 253px;">
+                    <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135229/identificador.png" style="width: 680.7332425337001px; height: 179.94164432454804px; max-height: none; max-width: none;">
+                    <br>
+                </div>
+            </section>
+            <section>
+                <section>
+                    <h2>Restricciones</h2>
+                    <div>
+                        <br>
+                    </div>
+                    <div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>Se trata de limitaciones en las estructuras y en los datos impuestas por el propio modelo o por el desarrollador del modelo.&nbsp;</div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>Estas solo deben darse entre las entidades del modelo, nunca entre las relaciones.&nbsp;</div>
+                    </div>
+                </section>
+                <section>
+                    <h2>Restricciones</h2>
+                    <div>
+                        <br>
+                    </div>
+                    <div>
+                        <br>
+                    </div>
+                    <div>
+                        <div>Ejemplos de restricción</div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>El modelo obliga a que las entidades tengan un <b>identificador</b>.&nbsp;</div>
+                        <div>El uso de <b>dominios</b> se puede considerar una restricción sobre los valores.&nbsp;</div>
+                        <div>Necesidad de<b> Integridad referencial</b>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>Restricciones</h2>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <div>Ejemplos de restricción</div>
+                    <div>
+                        <b>Restricción de dominio</b>: Un trabajador de Correos no puede tener un sueldo menor a X&nbsp;</div>
+                        <div>
+                            <b>Integridad referencial</b>: Si cierra Correos no puede quedar ninguna Oficina abierta en la base de datos</div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>Relaciones</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>Esta se define como la asociación, vinculación o correspondencia entre entidades.<br>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Relaciones</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <div>
+                                <br>
+                            </div>
+                            <div>Ejemplo de relación:</div>
+                            <div>
+                                <br>
+                            </div>
+                            <div>PAÍS → &nbsp; &nbsp; &nbsp; &nbsp;<b>
+                                <font style="font-size: 72px;">TIENE</font>
+                                </b> &nbsp; &nbsp; → PARQUE NATURAL</div>
+                            </div>
+                        </section>
+                    </section>
+                    <section>
+                        <section>
+                            <h2>Relaciones</h2>
+                            <div>
+                                <br>
+                            </div>
+                            <div>
+                                <br>
+                            </div>
+                            <div>
+                                <br>
+                            </div>
+                            <div>En el modelo relacional se representa con un rombo entre las entidades relacionadas<br>
+                            </div>
+                            <div>
+                                <br>
+                            </div>
+                            <div>
+                                <br>
+                            </div>
+                            <div>
+                                <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135237/relacion.png" style="width: 874.274967859015px; height: 108.05039764019791px; max-height: none; max-width: none;">
+                                <br>
+                            </div>
+                        </section>
+                        <section>
+                            <h2>
+                                <br>
+                            </h2>
+                            <h2>
+                                <br>
+                            </h2>
+                            <h2>
+                                <br>
+                            </h2>
+                            <h2>Elementos de una relación</h2>
+                        </section>
+                        <section>
+                            <h2>Nombre</h2>
+                            <div>
+                                <br>
+                            </div>
+                            <div>
+                                <br>
+                            </div>
+                            <div>
+                                <br>
+                            </div>
+                            <div>
+                                <b>
+                                <font style="font-size: 54px;">Nombre</font>
+                            </b>, es el valor por el que se distingue del resto. En la representación gráfica se correspondería con la etiqueta incluida en el rombo que representa la relación.<br>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Nombre</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135242/nombre-relacion.png" style="width: 899.9346161519549px; height: 104.84261691517581px; max-height: none; max-width: none;">
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>Aporta semántica al modelo relacional<br>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Grado</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>Número de entidades que participan en un tipo de relación. Será de grado 2 (o binaria) cuando asocia dos tipos de entidad. Para las relaciones de grado 2 puede existir un caso particular que son las reflexivas o recursivas, en las cuales una entidad se asocia consigo misma.<br>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Grado</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div class="absolute-element" style="position: absolute; width: 576px; height: 380px; z-index: 4; left: 202px; top: 185px;">
+                            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135246/binaria.png" style="width: 535.9424128208884px; height: 342.15030922286815px; max-height: none; max-width: none;">
+                            <br>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Tipo de correspondencia</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>Número máximo de ejemplares que pueden estar asociados, en una determinada relación, con un ejemplar de otro tipo. Para representarlo gráficamente se pone una etiqueta 0:N, 1:1, 1:N o N:M en el lado de la relación que corresponda o bien se orienta el arco de la unión en el sentido 1 a N mediante una flecha<br>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Tipo de correspondencia</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div class="absolute-element" style="position: absolute; width: 815px; height: 359px; z-index: 4; left: 86px; top: 197px;">
+                            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135249/grado.png" style="width: 774.9529311263568px; height: 320.99292637583005px; max-height: none; max-width: none;">
+                            <br>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Papel</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <span>El papel o rol, es la función que cada uno de los tipos de entidad tiene en la relación. Se representa poniendo el nombre del papel en el arco de cada entidad</span>
+                            <br>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Papel</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135251/papel.png" style="width: 880.9127293473583px; height: 167.94341267114396px; max-height: none; max-width: none;">
+                            <br>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Cardinalidad</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>Número mínimo y máximo de ejemplares de un tipo de entidad que pueden estar interrelacionadas con un ejemplar del otro, u otros tipos de entidad que participan en el tipo de relación. Se representará graficamente mediante un etiqueta del tipo (0,1), (1,1), (0,N) o (1,N).<br>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Cardinalidad</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135254/cardinalidad.png" style="width: 874.2466742534058px; height: 241.626878630472px; max-height: none; max-width: none;">
+                            <br>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Atributos de las relaciones</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>Se produce cuando el atributo identifica una característica propia de la relación y no de alguna de sus entidades<br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <span>Ejemplo de atributo en relación:</span>
+                            <br>
+                        </div>
+                        <div>
+                            <div>
+                                <br>
+                            </div>
+                            <div>
+                                <ul>
+                                    <li>
+                                        <span style="text-align: center;">Fecha de un evento</span>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <span style="text-align: center;">Edición de un curso</span>
+                                        <br>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Especialización</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>Entidades que se pueden dividir en entidades más concretas. La entidad general comparte con las especializadas sus atributos. Se detecta cuando hay ejemplares para los que no tienen sentido algunos de los atributos mientras que otros si.<br>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <h2>Especialización</h2>
+                    <div>
+                        <br>
+                    </div>
+                    <div class="absolute-element" style="position: absolute; width: 524px; height: 359px; z-index: 4; left: 411px; top: 313px;">
+                        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135261/expecializaci_n-2.png">
+                        <br>
+                    </div>
+                    <div class="absolute-element" style="position: absolute; width: 388px; height: 191px; z-index: 4; left: 18px; top: 120px;">
+                        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135259/expecializaci_n-1.png">
+                        <br>
+                    </div>
+                </section>
+                <section>
+                    <h2>Generalización</h2>
+                    <div>
+                        <br>
+                    </div>
+                    <div>
+                        <br>
+                    </div>
+                    <div>
+                        <br>
+                    </div>
+                    <div>La generalización es si se puede agrupar varias entidades en una o mas entidades generales. Se observa generalización si en varias entidades existen atributos iguales.<br>
+                    </div>
+                </section>
+                <section>
+                    <section>
+                        <h2>Generalización</h2>
+                        <div class="absolute-element" style="position: absolute; width: 511px; height: 296px; z-index: 4; left: 406px; top: 379px;">
+                            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135263/generalizacion-2.png">
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div class="absolute-element" style="position: absolute; width: 518px; height: 233px; z-index: 4; left: 17px; top: 120px;">
+                            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135262/generalizacion-1.png">
+                            <br>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Modelización</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <div>
+                                <ul>
+                                    <li>
+                                        <span style="text-align: center;">Encontrar <b>entidades</b>&nbsp;</span>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <span style="text-align: center;">
+                                            <b>Identificar atributos</b> de las entidades</span>
+                                            <br>
+                                        </li>
+                                        <li>
+                                            <span style="text-align: center;">Buscar <b>identificadores</b>
+                                        </span>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <span style="text-align: center;">Especificar las relaciones y cardinalidades</span>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <span style="text-align: center;">Identificar <b>entidades débiles</b>
+                                    </span>
+                                    <br>
+                                </li>
+                                <li>
+                                    <span style="text-align: center;">
+                                        <b>Especializar </b>y<b> generalizar</b> entidades donde sea posible</span>
+                                        <br>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>
+                            <br>
+                        </h2>
+                        <div class="absolute-element" style="position: absolute; width: 818.2599469496022px; height: 640px; z-index: 4; left: 77px; top: 19px; max-height: none; max-width: none;">
+                            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135269/borring.jpg" style="width: 785.2927304362333px; height: 618.2643675783058px; max-height: none; max-width: none;">
+                            <br>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <h2>Práctica guiada</h2>
+                    <div>
+                        <br>
+                    </div>
+                    <div>
+                        <div style="text-align: center;">
+                            <font style="font-size: 32px;" color="#ff0000">Crear un diseño entidad relación que permita almacenar datos geográficos referidos a un país:</font>
+                        </div>
+                        <div style="text-align: left; ">
+                            <ul>
+                                <li>
+                                    <span style="font-size: 24px;">Se almacenará la población de cada localidad, junto con su nombre y los datos del distrito al que pertenece la localidad, su nombre y superficie</span>
+                                    <br>
+                                </li>
+                                <li>
+                                    <span style="font-size: 24px;">Necesitamos también conocer el nombre de cada provincia y las localidades y distritos de la misma</span>
+                                    <br>
+                                </li>
+                                <li>
+                                    <span style="font-size: 24px;">Para &nbsp;identificar a la provincia se usarán los dos primeros dígitos del código postal. Es decir 111 será el código de una provincia y 51 el del distrito</span>
+                                    <br>
+                                </li>
+                                <li>
+                                    <span style="font-size: 24px;">Necesitamos saber qué localidad es la capital de cada provincia y cuáles lo son de cada distrito</span>
+                                    <br>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h2>Encontrar entidades</h2>
+                    <div>
+                        <br>
+                    </div>
+                    <div>
+                        <li style="text-align: left; font-size: 36.47214889526367px; font-style: normal; font-variant: normal;">
+                            <span style="font-size: 24px;">Se almacenará la población de cada <font color="#ff0000">
+                                <b>localidad</b>
+                            </font>, junto con su nombre y los datos del <font color="#ff0000">
+                            <b>distrito</b>
+                            </font> al que pertenece la localidad, su nombre y superficie</span>
+                            <br>
+                        </li>
+                        <li style="text-align: left; font-size: 36.47214889526367px; font-style: normal; font-variant: normal;">
+                            <span style="font-size: 24px;">Necesitamos también conocer el nombre de cada <font color="#ff0000">
+                                <b>provincia</b>
+                                </font> y las localidades y distritos de la misma</span>
+                                <br>
+                            </li>
+                            <li style="text-align: left; font-size: 36.47214889526367px; font-style: normal; font-variant: normal;">
+                                <span style="font-size: 24px;">Para &nbsp;identificar a la provincia se usarán los dos primeros dígitos del código postal. Es decir 111 será el código de una provincia y 51 el del distrito</span>
+                                <br>
+                            </li>
+                            <li style="text-align: left; font-size: 36.47214889526367px; font-style: normal; font-variant: normal;">
+                                <span style="font-size: 24px;">Necesitamos saber qué localidad es la capital de cada provincia y cuáles lo son de cada distrito</span>
+                            </li>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Encontrar entidades</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div class="absolute-element" style="position: absolute; width: 146px; height: 82.894783377542px; z-index: 4; left: 117px; top: 153px; max-height: none; max-width: none;">
+                            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135274/provincia.png" style="width: 209.697375891622px; height: 75.63306784355777px; max-height: none; max-width: none;">
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div class="absolute-element" style="position: absolute; width: 145px; height: 82px; z-index: 4; left: 593px; top: 212px;">
+                            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135276/distrito.png" style="width: 238.86808408403795px; height: 88.3138812829919px; max-height: none; max-width: none;">
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div class="absolute-element" style="position: absolute; width: 159px; height: 82px; z-index: 4; left: 295px; top: 428px;">
+                            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135278/localidad.png" style="width: 275.29248798751684px; height: 88.3138812829919px; max-height: none; max-width: none;">
+                            <br>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Identificar atributos</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <li style="font-size: 36.47214889526367px; font-style: normal; font-variant: normal; text-align: left;">
+                                <span style="font-size: 24px;">Se almacenará la <font color="#00ff00">población</font> de cada&nbsp;<font color="#ff0000">
+                                    <b>localidad</b>
+                                </font>, junto con su nombre y los datos del&nbsp;<font color="#ff0000">
+                                <b>distrito</b>
+                                </font>&nbsp;al que pertenece la localidad, su <font color="#00ff00">nombre</font> y <font color="#00ff00">superficie</font>
+                            </span>
+                            <br>
+                        </li>
+                        <li style="font-size: 36.47214889526367px; font-style: normal; font-variant: normal; text-align: left;">
+                            <span style="font-size: 24px;">Necesitamos también conocer el <font color="#00ff00">nombre</font> de cada&nbsp;<font color="#ff0000">
+                                <b>provincia</b>
+                                </font>&nbsp;y las localidades y distritos de la misma</span>
+                                <br>
+                            </li>
+                            <li style="font-size: 36.47214889526367px; font-style: normal; font-variant: normal; text-align: left;">
+                                <span style="font-size: 24px;">Para &nbsp;identificar a la provincia se usarán los dos primeros dígitos del código postal. Es decir 111 será el código de una provincia y 51 el del distrito</span>
+                                <br>
+                            </li>
+                            <li style="font-size: 36.47214889526367px; font-style: normal; font-variant: normal; text-align: left;">
+                                <span style="font-size: 24px;">Necesitamos saber qué localidad es la capital de cada provincia y cuáles lo son de cada distrito</span>
+                            </li>
+                        </div>
+                    </section>
+                    <section>
+                        <h2 style="font-style: normal; font-variant: normal;">IDENTIFICAR ATRIBUTOS</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135283/atributos-ejemplo.png">
+                            <br>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Buscar identificadores</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <li style="font-size: 36.47214889526367px; font-style: normal; font-variant: normal; text-align: left;">
+                                <span style="font-size: 24px;">Se almacenará la&nbsp;<font color="#00ff00">población</font>&nbsp;de cada&nbsp;<font color="#ff0000">
+                                    <b>localidad</b>
+                                </font>, junto con su nombre y los datos del&nbsp;<font color="#ff0000">
+                                <b>distrito</b>
+                                </font>&nbsp;al que pertenece la localidad, su&nbsp;<font color="#00ff00">nombre</font>&nbsp;y&nbsp;<font color="#00ff00">superficie</font>
+                            </span>
+                            <br>
+                        </li>
+                        <li style="font-size: 36.47214889526367px; font-style: normal; font-variant: normal; text-align: left;">
+                            <span style="font-size: 24px;">Necesitamos también conocer el&nbsp;<font color="#00ff00">nombre</font>&nbsp;de cada&nbsp;<font color="#ff0000">
+                                <b>provincia</b>
+                                </font>&nbsp;y las localidades y distritos de la misma</span>
+                                <br>
+                            </li>
+                            <li style="font-size: 36.47214889526367px; font-style: normal; font-variant: normal; text-align: left;">
+                                <span style="font-size: 24px;">
+                                    <font color="#ffff00">Para &nbsp;identificar a la provincia se usarán los dos primeros dígitos del código postal. Es decir 111 será el código de una provincia y 51 el del distrito</font>
+                                </span>
+                                <br>
+                            </li>
+                            <li style="font-size: 36.47214889526367px; font-style: normal; font-variant: normal; text-align: left;">
+                                <span style="font-size: 24px;">Necesitamos saber qué localidad es la capital de cada provincia y cuáles lo son de cada distrito</span>
+                            </li>
+                        </div>
+                    </section>
+                    <section>
+                        <h2 style="font-style: normal; font-variant: normal;">BUSCAR IDENTIFICADORES</h2>
+                        <div>
+                            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135481/identificadores-ejemplo.png">
+                            <br>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Especificar relaciones y cardinalidades</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <li style="font-size: 36.47214889526367px; font-style: normal; font-variant: normal; text-align: left;">
+                                <span style="font-size: 24px;">Se almacenará la&nbsp;<font color="#00ff00">población</font>&nbsp;de cada&nbsp;<font color="#ff0000">
+                                    <b>localidad</b>
+                                </font>, junto con su nombre y los datos del&nbsp;<font color="#ff0000">
+                                <b>distrito</b>
+                                </font>&nbsp;al que <font color="#0000ff">pertenece</font> la localidad, su&nbsp;<font color="#00ff00">nombre</font>&nbsp;y&nbsp;<font color="#00ff00">superficie</font>
+                            </span>
+                            <br>
+                        </li>
+                        <li style="font-size: 36.47214889526367px; font-style: normal; font-variant: normal; text-align: left;">
+                            <span style="font-size: 24px;">Necesitamos también conocer el&nbsp;<font color="#00ff00">nombre</font>&nbsp;de cada&nbsp;<font color="#ff0000">
+                                <b>provincia</b>
+                                </font>&nbsp;y las localidades y distritos <font color="#0000ff">de la misma</font>
+                            </span>
+                            <br>
+                        </li>
+                        <li style="font-size: 36.47214889526367px; font-style: normal; font-variant: normal; text-align: left;">
+                            <span style="font-size: 24px;">
+                                <font color="#ffff00">Para &nbsp;identificar a la provincia se usarán los dos primeros dígitos del código postal. Es decir 111 será el código de una provincia y 51 el del distrito</font>
+                            </span>
+                            <br>
+                        </li>
+                        <li style="font-size: 36.47214889526367px; font-style: normal; font-variant: normal; text-align: left;">
+                            <span style="font-size: 24px;">Necesitamos saber qué localidad <font color="#0000ff">es la capital </font>de cada provincia y cuáles lo <font color="#0000ff">son de cada distrito</font>
+                        </span>
+                    </li>
+                </div>
+            </section>
+            <section>
+                <h2 style="font-style: normal; font-variant: normal;">ESPECIFICAR RELACIONES Y CARDINALIDADES</h2>
+                <div>
+                    <br>
+                </div>
+                <div class="absolute-element" style="position: absolute; width: 857px; height: 553px; z-index: 4; left: 53px; top: 147px;">
+                    <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135488/cardinalidades-ejemplo.png" style="width: 813.5998306037319px; height: 515.6843498948398px; max-height: none; max-width: none;">
+                    <br>
+                </div>
+                <div>
+                    <br>
+                </div>
+            </section>
+            <section>
+                <h2>Identificar entidades débiles</h2>
+                <div>
+                    <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135494/debiles-ejemplo.png">
+                    <br>
+                </div>
+            </section>
+            <section>
+                <h2>RESULTADO</h2>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/michogar/images/135501/resultado-ejemplo.png">
+                    <br>
+                </div>
+            </section>
+            <section>
+                <h2>¡¡RECORDAD!!</h2>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <div>Encontrar <b>entidades</b>&nbsp;</div>
+                    <div>Identificar <b>atributos</b> de las entidades</div>
+                    <div>Buscar <b>identificadores</b>
+                </div>
+                <div>Especificar las <b>relaciones </b>y<b> cardinalidades</b>
+            </div>
+            <div>Identificar <b>entidades débiles</b>
+        </div>
+        <div>
+            <b>Especializar</b> y <b>generalizar</b> entidades donde sea posible</div>
+        </div>
+    </section>
+</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
