@@ -1,0 +1,1135 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Tema 3 - Conceptos Básicos SQL</title>
+
+		<meta name="description" content="Curso de Bases de Datos Espaciales con PostGIS 2.0">
+		<meta name="author" content="geomati.co">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.min.css">
+		<link rel="stylesheet" href="../css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element between this containers is displayed as a slide -->
+<div class="slides">
+    <section>
+        <h1>
+            <br>
+            </h1>
+<h1>
+<span style="font-size: 135.72px;">Conceptos Básicos Sql</span>
+            <br>
+</h1>
+        </section>
+        <section>
+            <h2>objetivos</h2>
+<div>
+            <br>
+        </div>
+<div>
+        <br>
+    </div>
+<div>
+    <br>
+</div>
+<div>
+    <ul>
+        <li>Conocer la sintaxis de SQL</li>
+<li>Aprender a manejar SQL contra la base de datos</li>
+</ul>
+    </div>
+</section>
+<section>
+    <h2>Introducción</h2>
+<div>
+    <br>
+</div>
+<div>
+<br>
+</div>
+<div>
+    <ul>
+        <li>Lenguaje <b>declarativo</b> de acceso a bases de datos relacionales que permite especificar diversos tipos de operaciones en ellas</li>
+<li>Permiten efectuar <b>consultas</b> con el fin de recuperar de forma sencilla información de interés de bases de datos, así como hacer cambios en ella.</li>
+</ul>
+    </div>
+</section>
+<section>
+    <section>
+        <h2>Componentes SQL</h2>
+<div>
+        <br>
+    </div>
+<div>
+    <br>
+</div>
+<div>
+<br>
+</div>
+<div>
+    <ul>
+        <li>Comandos</li>
+<li>Clausulas</li>
+<li>Operadores</li>
+<li>Funciones de agregado</li>
+</ul>
+    </div>
+</section>
+<section>
+    <h2>Comandos</h2>
+<div>
+    <br>
+</div>
+<div>
+<div>Tres tipos de comandos:</div>
+<div>
+<br>
+</div>
+<div style="text-align: left; ">Los <i>DLL</i>(<b>Data Definition Language</b>) que permiten crear y definir nuevas bases de datos, campos e índices.</div>
+<div style="text-align: left; ">Los <i>DML</i>(<b>Data Manipulation Language</b>) que permiten generar consultas para ordenar, filtrar y extraer datos de la base de datos.</div>
+<div style="text-align: left; ">Los <i>DCL</i>(<b>Data Control Language</b>) que se encargan de definir las permisos sobre los datos</div>
+</div>
+</section>
+</section>
+<section>
+    <h2>DDL</h2>
+<div>
+    <br>
+</div>
+<div>
+<br>
+</div>
+<div>
+<br>
+</div>
+<div>
+<br>
+</div>
+<div>Se encarga de la modificación de la estructura de los objetos de la base de datos<br>
+</div>
+</section>
+<section>
+    <h2>DDL</h2>
+<div>
+    <br>
+</div>
+<div>
+<br>
+</div>
+<div>
+<br>
+</div>
+<div>
+<div>CREATE</div>
+<div>ALTER</div>
+<div>DROP</div>
+<div>TRUNCATE</div>
+</div>
+</section>
+<section>
+    <h2>CREATE</h2>
+<div class="absolute-element" style="position: absolute; width: 741px; height: 46px; z-index: 4; left: 114px; top: 79px;">
+<span>
+    <font style="font-size: 24px;">Crea un objeto dentro del gestor de base de datos, por ejemplo una tabla:</font>
+</span>
+<br>
+</div>
+<div class="absolute-element" style="position: absolute; width: 511px; height: 557px; z-index: 4; left: 233px; top: 129px;">
+<div style="text-align: left; ">
+<font style="font-size: 24px;">
+    <i># CREATE TABLE Empleado</i>
+</font>
+</div>
+<div style="text-align: left; ">
+<font style="font-size: 24px;">
+    <i>(</i>
+</font>
+</div>
+<div style="text-align: left; ">
+<font style="font-size: 24px;">
+    <i>id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,</i>
+</font>
+</div>
+<div style="text-align: left; ">
+<font style="font-size: 24px;">
+    <i>Nombre VARCHAR(50),</i>
+</font>
+</div>
+<div style="text-align: left; ">
+<font style="font-size: 24px;">
+    <i>Apellido VARCHAR(50),</i>
+</font>
+</div>
+<div style="text-align: left; ">
+<font style="font-size: 24px;">
+    <i>Direccion VARCHAR(255),</i>
+</font>
+</div>
+<div style="text-align: left; ">
+<font style="font-size: 24px;">
+    <i>Ciudad VARCHAR(60),</i>
+</font>
+</div>
+<div style="text-align: left; ">
+<font style="font-size: 24px;">
+    <i>Peso VARCHAR (5),</i>
+</font>
+</div>
+<div style="text-align: left; ">
+<font style="font-size: 24px;">
+    <i>Edad (2),</i>
+</font>
+</div>
+<div style="text-align: left; ">
+<font style="font-size: 24px;">
+    <i>Actividad Específica (100),</i>
+</font>
+</div>
+<div style="text-align: left; ">
+<font style="font-size: 24px;">
+    <i>idCargo INT</i>
+</font>
+</div>
+<div style="text-align: left; ">
+<font style="font-size: 24px;">
+    <i>)</i>
+</font>
+</div>
+</div>
+</section>
+<section>
+    <h2>ALTER</h2>
+<div>
+    <br>
+</div>
+<div>
+<div>Permite modificar la estructura de un objeto</div>
+<div>
+<br>
+</div>
+<div>Añadir una columna</div>
+<div>
+<i># ALTER TABLE 'NOMBRE_TABLA' ADD NUEVO_CAMPO INT;</i>
+</div>
+<div>
+<br>
+</div>
+<div>Eliminar una columna</div>
+<div>
+<i># ALTER TABLE 'NOMBRE_TABLA' DROP COLUMN NOMBRE_COLUMNA;</i>
+</div>
+</div>
+</section>
+<section>
+    <h2>DROP</h2>
+<div>
+    <br>
+</div>
+<div>
+<div>Este comando elimina un objeto de la base de datos</div>
+<div>
+<br>
+</div>
+<div>Una tabla</div>
+<div>
+<i># DROP TABLE 'NOMBRE_TABLA';</i>
+</div>
+<div>
+<br>
+</div>
+<div>Un esquema</div>
+<div>
+<i># DROP SCHEMA 'ESQUEMA;'</i>
+</div>
+<div>
+<br>
+</div>
+<div>Una base de datos completa</div>
+<div>
+<i># DROP DATABASE 'BASEDATOS';</i>
+</div>
+</div>
+</section>
+<section>
+    <section>
+        <h2>TRUNCATE</h2>
+<div>
+        <br>
+    </div>
+<div>
+<div>Este comando trunca todo el contenido de una tabla.</div>
+<div>
+    <br>
+</div>
+<div>Sirve cuando se quiere eliminar absolutamente todos los registros.</div>
+<div>
+<br>
+</div>
+<div>Borra la tabla y la vuelve a crear y no ejecuta ninguna transacción.</div>
+<div>
+<br>
+</div>
+<div>
+<br>
+</div>
+<div># TRUNCATE TABLE 'NOMBRE_TABLA';</div>
+</div>
+</section>
+<section>
+    <h2>DCL</h2>
+<div>
+    <br>
+</div>
+<div>
+<br>
+</div>
+<div>
+<br>
+</div>
+<div>Se encarga de definir las permisos sobre los datos<br>
+</div>
+<div>
+<br>
+</div>
+<div>
+<div>GRANT</div>
+<div>REVOKE</div>
+</div>
+</section>
+</section>
+<section>
+    <h2>GRANT</h2>
+<div>
+    <br>
+</div>
+<div>
+<div>Se usa para asignar acceso y privilegios a los objetos de la base de datos</div>
+<div>
+<br>
+</div>
+<div style="text-align: left; ">GRANT privilege_name&nbsp;</div>
+<div style="text-align: left; ">ON object_name&nbsp;</div>
+<div style="text-align: left; ">TO {user_name |PUBLIC |role_name}</div>
+<div style="text-align: left; ">
+<br>
+</div>
+<div style="text-align: left; ">
+<br>
+</div>
+<div style="text-align: left; ">
+<i># GRANT ALL&nbsp;</i>
+</div>
+<div style="text-align: left; ">
+<i>ON SCHEMA gis&nbsp;</i>
+</div>
+<div style="text-align: left; ">
+<i>TO alumno&nbsp;</i>
+</div>
+</div>
+</section>
+<section>
+    <section>
+        <h2>REVOKE</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <div>Se usa para asignar eliminar acceso y privilegios a los objetos de la base de datos</div>
+            <div>
+                <br>
+            </div>
+            <div style="text-align: left; ">REVOKE privilege_name&nbsp;</div>
+            <div style="text-align: left; ">ON object_name&nbsp;</div>
+            <div style="text-align: left; ">FROM {user_name |PUBLIC |role_name}</div>
+            <div style="text-align: left; ">
+                <br>
+            </div>
+            <div style="text-align: left; ">
+                <br>
+            </div>
+            <div style="text-align: left; "># REVOKE ALL&nbsp;</div>
+            <div style="text-align: left; ">ON SCHEMA gis&nbsp;</div>
+            <div style="text-align: left; ">TO alumno&nbsp;</div>
+        </div>
+    </section>
+    <section>
+        <h2>DML</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <span>Permite generar consultas para ordenar, filtrar y extraer datos de la base de datos.</span>
+            <br>
+        </div>
+    </section>
+</section>
+<section>
+    <h2>dml</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>SELECT</div>
+        <div>INSERT</div>
+        <div>UPDATE</div>
+        <div>DELETE</div>
+    </div>
+</section>
+<section>
+    <h2>SELECT</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>Devuelve un grupo de registros de una o más tablas</div>
+        <div>
+            <br>
+        </div>
+        <div>Extrae todos los registros de una tabla</div>
+        <div>
+            <i># SELECT * FROM Tabla</i>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Se combina con las clausulas para extraer la información</div>
+    </div>
+</section>
+<section>
+    <h2>INSERT</h2>
+    <div>
+        <span>Una sentencia INSERT de SQL agrega uno o más registros a una (y sólo una) tabla en una base de datos relacional.</span>
+        <br>
+    </div>
+    <div>
+        <div>
+            <br>
+        </div>
+        <div>Inserción definiendo las columnas</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i># INSERT INTO agenda_telefonica (nombre, numero) VALUES ('Roberto Jeldrez', 4886850);</i>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Asumiendo que las columnas son iguales</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i># INSERT INTO agenda_telefonica VALUES ('Jhonny Aguiar', 080473968);</i>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>UPDATE</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>Es utilizada para modificar los valores de un conjunto de registros existentes en una tabla.</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i># UPDATE mi_tabla SET campo1 = 'nuevo valor campo1' WHERE campo2 = 'N';</i>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Actualizando el número</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i># UPDATE agenda_telefonica SET numero = &nbsp;8887456 WHERE nombre = 'Roberto Jeldrez';</i>
+        </div>
+    </div>
+    <div>
+        <br>
+    </div>
+</section>
+<section>
+    <section>
+        <h2>DELETE</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <div>Borra uno o más registros existentes en una tabla.</div>
+            <div>
+                <br>
+            </div>
+            <div># DELETE FROM 'tabla' WHERE 'columna1' = 'valor1'</div>
+            <div>
+                <br>
+            </div>
+            <div># DELETE FROM agenda_telefonica WHERE nombre = 'Roberto Jeldrez';</div>
+        </div>
+    </section>
+    <section>
+        <h2>Clausulas</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Las cláusulas son condiciones de modificación utilizadas para definir los datos que desea seleccionar o manipular.<br>
+        </div>
+    </section>
+</section>
+<section>
+    <h2>Clausulas</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>
+            <br>
+        </div>
+        <div>FROM</div>
+        <div>WHERE</div>
+        <div>ORDER BY</div>
+        <div>GROUP BY</div>
+        <div>HAVING</div>
+    </div>
+</section>
+<section>
+    <h2>FROM</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>Especifica la tabla de la cual se van a seleccionar los registros</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i># SELECT * FROM Tabla</i>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>WHERE</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>Se usa para determinar qué registros de las tablas enumeradas en la cláusula FROM aparecerán en los resultados de la instrucción SELECT. &nbsp;WHERE es opcional, pero cuando aparece debe ir a continuación de FROM</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <span class="Apple-tab-span" style="white-space:pre">	</span>
+            <i># SELECT Apellidos, Salario FROM Empleados&nbsp;</i>
+        </div>
+        <div>
+            <i>
+            <span class="Apple-tab-span" style="white-space:pre">	</span>WHERE Salario &gt; 21000;</i>
+        </div>
+        <div>
+            <i>
+            <span class="Apple-tab-span" style="white-space:pre">	</span># SELECT Id_Producto, Existencias FROM Productos&nbsp;</i>
+        </div>
+        <div>
+            <i>
+            <span class="Apple-tab-span" style="white-space:pre">	</span>WHERE Existencias &lt;= Nuevo_Pedido;</i>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>ORDER BY</h2>
+    <div>
+        <div>Especifica el orden en que se desean recuperar los registros de las tablas</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i># SELECT CodigoPostal, Nombre, Telefono FROM Clientes ORDER BY Nombre;</i>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Y se puede especificar el orden de los registros: ascendente mediante la claúsula (ASC -se toma este valor por defecto) ó descendente (DESC):</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i># SELECT CodigoPostal, Nombre, Telefono FROM Clientes ORDER BY CodigoPostal DESC , Nombre ASC;</i>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>GROUP BY</h2>
+    <div>
+        <div>Combina los registros con valores idénticos, en la lista de campos especificados, en un único registro.</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i># SELECT campos FROM tabla WHERE criterio</i>
+        </div>
+        <div>
+            <i>GROUP BY campos del grupo</i>
+        </div>
+        <div>Las columnas de agrupación.</div>
+        <div>
+            <br>
+        </div>
+        <div>Los campos de la lista de campos de SELECT deben incluirse en la cláusula GROUP BY</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i># SELECT Id_Familia, Sum(Stock)</i>
+        </div>
+        <div>
+            <i>FROM Productos GROUP BY Id_Familia;</i>
+        </div>
+    </div>
+</section>
+<section>
+    <section>
+        <h2>HAVING</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <div>La cláusula HAVING se usa normalmente junto con la cláusula GROUP BY para filtrar los resultados de valores de agregado. Se utiliza para expresar la condición que debe satisfacer cada grupo</div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <i># SELECT oficina</i>
+            </div>
+            <div>
+                <i>FROM empleados</i>
+            </div>
+            <div>
+                <i>GROUP BY oficina</i>
+            </div>
+            <div>
+                <i>HAVING AVG(ventas) &gt; 500000</i>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>Operadores</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <div>Lógicos</div>
+            <div>Comparación</div>
+        </div>
+    </section>
+</section>
+<section>
+    <h2>Operadores comparación</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>&lt;<span class="Apple-tab-span" style="white-space:pre">	</span>Menor que</div>
+        <div>&gt;<span class="Apple-tab-span" style="white-space:pre">	</span>Mayor que</div>
+        <div>&lt;&gt;<span class="Apple-tab-span" style="white-space:pre">	</span>Distinto de</div>
+        <div>&lt;=<span class="Apple-tab-span" style="white-space:pre">	</span>Menor o igual que</div>
+        <div>&gt;=<span class="Apple-tab-span" style="white-space:pre">	</span>Mayor o igual que</div>
+        <div>BETWEEN<span class="Apple-tab-span" style="white-space:pre">	</span>Intervalo</div>
+        <div>LIKE<span class="Apple-tab-span" style="white-space:pre">	</span> Comparación</div>
+        <div>In<span class="Apple-tab-span" style="white-space:pre">	</span>Especificar en lista de valores</div>
+    </div>
+</section>
+<section>
+    <h2>Operadores comparación</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>
+            <i># SELECT * FROM Empleados WHERE Edad &gt; 25;</i>
+        </div>
+        <div>
+            <i>
+            <br>
+        </i>
+    </div>
+    <div>
+        <i># SELECT * FROM Empleados WHERE Sueldo = 100;</i>
+    </div>
+    <div>
+        <i>
+        <br>
+    </i>
+</div>
+<div>
+    <i># SELECT * FROM Empleados WHERE Estado &lt;&gt; 'Soltero';</i>
+</div>
+<div>
+    <i>
+    <br>
+</i>
+</div>
+<div>
+    <i># SELECT * FROM Empleados WHERE Sueldo &gt;= 10;</i>
+</div>
+</div>
+</section>
+<section>
+    <h2>BETWEEN</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>Para indicar que deseamos recuperar los registros según el intervalo de valores de un campo emplearemos el operador Between:</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i># SELECT * FROM Pedidos WHERE CodPostal <b>Between</b> 28000 And 28999;</i>
+        </div>
+        <div>(Devuelve los pedidos realizados en la provincia de Madrid)</div>
+    </div>
+</section>
+<section>
+    <h2>LIKE</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>Permite comparar patrones dentro de campos de tipo cadena</div>
+        <div>
+            <br>
+        </div>
+        <div>Con los registros:</div>
+        <div>"El Aleph", "Borges";</div>
+        <div>&nbsp;"Antologia poetica", "J.L. Borges";</div>
+        <div>
+            <br>
+        </div>
+        <div>&nbsp;<i># Select * from libros</i>
+        <i>&nbsp;where autor='Borges';</i>
+        <span>&nbsp;</span>
+    </div>
+    <div>
+        <span>devolverá "El Aleph", "Borges";</span>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <i># Select *from libros</i>
+        <i>&nbsp; where autor like "%Borges%"</i>
+        <span>;&nbsp;</span>
+    </div>
+    <div>
+        <span>mostrará ambos registros</span>
+    </div>
+</div>
+</section>
+<section>
+    <section>
+        <h2>IN</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <div>Este operador devuelve aquellos registros cuyo campo indicado coincide con alguno de los indicados en una lista. Su sintaxis es:</div>
+            <div>
+                <br>
+            </div>
+            <div>expresión [Not] In(valor1, valor2, . . .)</div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <i># SELECT * FROM Pedidos WHERE Provincia In ('Pontevedra', 'Lugo', 'A Coruña');</i>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>Operadores lógicos</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <div>AND Es el “y” lógico. Evalúa dos condiciones y devuelve un valor de verdad sólo si ambas son ciertas.</div>
+            <div>
+                <br>
+            </div>
+            <div>OR Es el “o” lógico. Evalúa dos condiciones y devuelve un valor de verdad si alguna de las dos es cierta.</div>
+            <div>
+                <br>
+            </div>
+            <div>NOT Negación lógica. Devuelve el valor contrario de la expresión.</div>
+        </div>
+    </section>
+</section>
+<section>
+    <section>
+        <h2 style="font-style: normal; font-variant: normal;">OPERADORES LÓGICOS</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <div>
+                <i># SELECT * FROM Empleados WHERE Edad &gt; 25 AND Edad &lt; 50;</i>
+            </div>
+            <div>
+                <i># SELECT * FROM Empleados WHERE (Edad &gt; 25 AND Edad &lt; 50) OR Sueldo = 100;</i>
+            </div>
+            <div>
+                <i># SELECT * FROM Empleados WHERE NOT Estado = 'Soltero';</i>
+            </div>
+            <div>
+                <i># SELECT * FROM Empleados WHERE (Sueldo &gt; 100 AND Sueldo &lt; 500) OR (Provincia = 'Madrid' AND Estado = 'Casado');</i>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>Funciones de agregado</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <div>
+                <br>
+            </div>
+            <div>GROUP BY</div>
+            <div>Count</div>
+            <div>AVG</div>
+            <div>Max, Min</div>
+            <div>SUM</div>
+            <div>...</div>
+        </div>
+    </section>
+</section>
+<section>
+    <h2>Count</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>Calcula el número de registros devueltos por una consulta. Su sintaxis es la siguiente:&nbsp;</div>
+        <div>
+            <br>
+        </div>
+        <div>&nbsp; &nbsp; Count(expr)</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i># SELECT Count(*) AS Total FROM Pedidos;&nbsp;</i>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>AVG</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>Calcula la media aritmética de un conjunto de valores contenidos en un campo especificado de una consulta:</div>
+        <div>
+            <br>
+        </div>
+        <div>Avg(expr)</div>
+        <div>
+            <br>
+        </div>
+        <div>La función AVG no incluye ningún campo Null en el cálculo. Un ejemplo del funcionamiento de AVG:</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i># SELECT AVG(Gastos) AS Promedio FROM</i>
+        </div>
+        <div>
+            <i>Pedidos WHERE Gastos &gt; 100;</i>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>Max, Min</h2>
+    <div>
+        <div>Devuelven el mínimo o el máximo de un conjunto de valores contenidos en un campo especifico de una consulta. Su sintaxis es:&nbsp;</div>
+        <div>&nbsp; &nbsp; <b>Min(expr)&nbsp;<span>&nbsp; &nbsp; Max(expr)&nbsp;</span>
+    </b>
+</div>
+<div>En donde expr es el campo sobre el que se desea realizar el cálculo.&nbsp;</div>
+<div>
+    <br>
+</div>
+<div>
+    <i># SELECT Min(Gastos) AS ElMin FROM Pedidos WHERE Pais = 'España';&nbsp;</i>
+</div>
+<div>
+    <i># SELECT Max(Gastos) AS ElMax FROM Pedidos WHERE Pais &nbsp;= 'España';&nbsp;</i>
+</div>
+</div>
+</section>
+<section>
+    <section>
+        <h2>Sum</h2>
+        <div>
+            <div>Devuelve la suma del conjunto de valores contenido en un campo específico de una consulta. Su sintaxis es:&nbsp;</div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <b>&nbsp; &nbsp; Sum(expr)&nbsp;</b>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <i># SELECT Sum(PrecioUnidad * Cantidad) AS Total FROM DetallePedido;&nbsp;</i>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>Manejo de varias tablas</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <div>JOIN</div>
+            <div>LEFT JOIN</div>
+            <div>RIGHT JOIN</div>
+            <div>UNION y UNION ALL</div>
+        </div>
+    </section>
+</section>
+<section>
+    <h2>JOIN</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>La sentencia SQL JOIN se utiliza para relacionar varias tablas. Nos permitirá obtener un listado de los campos que tienen coincidencias en ambas tablas<br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <i># select nombre, telefono, accion, cantidad from clientes join acciones on clientes.cid=acciones.cid;</i>
+        <br>
+    </div>
+</section>
+<section>
+    <h2>LEFT JOIN</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <span>La sentencia LEFT JOIN nos dará el resultado anterior mas los campos de la tabla de la izquierda del JOIN que no tienen coincidencias en la tabla de la derecha</span>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <i># select nombre, telefono, accion, cantidad from clientes left join acciones on clientes.cid=acciones.cid;</i>
+        <br>
+    </div>
+</section>
+<section>
+    <h2>RIGHT JOIN</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <span>Identico funcionamiento que en el caso anterior pero con la tabla que se incluye en la consulta a la derecha del JOIN</span>
+        <br>
+    </div>
+    <div>
+        <span>
+            <br>
+        </span>
+    </div>
+    <div>
+        <span>
+            <i># select nombre, telefono, accion, cantidad from clientes right join acciones on clientes.cid=acciones.cid;</i>
+            <br>
+        </span>
+    </div>
+</section>
+<section>
+    <section>
+        <h2>UNION y UNION ALL</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <span>Podemos combinar el resultado de varias sentencias con UNION o UNION ALL. UNION no nos muestra los resultados duplicados, pero UNION ALL si los muestra</span>
+            <br>
+        </div>
+        <div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <i># select nombre, telefono, accion, cantidad from clientes left join acciones on clientes.cid=acciones.cid where accion is null union select nombre, telefono, accion, cantidad from clientes right join acciones on clientes.cid=acciones.cid where nombre is null;</i>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>Vistas</h2>
+        <div>
+            <div style="text-align: left; ">Las vistas (“views”) en SQL son un mecanismo que permite generar un resultado a partir de una consulta (query) almacenado, y ejecutar nuevas consultas sobre este resultado como si fuera una tabla normal. Las vistas tienen la misma estructura que una tabla: filas y columnas. La única diferencia es que sólo se almacena de ellas la definición, no los datos.</div>
+            <div style="text-align: left; ">
+                <br>
+            </div>
+            <div style="text-align: left; ">La cláusula CREATE VIEW permite la creación de vistas. La cláusula asigna un nombre a la vista y permite especificar la consulta que la define. Su sintaxis es:</div>
+            <div style="text-align: left; ">
+                <br>
+            </div>
+            <div style="text-align: left; ">
+                <i># CREATE VIEW id_vista [(columna,…)]AS especificación_consulta;</i>
+            </div>
+        </div>
+    </section>
+</section>
+</div>
+			
+
+			<!-- Any section element between this container is displayed as a slide -->
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>			
