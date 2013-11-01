@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Tema 2 - Teoría de Bases de Datos</title>
+
+		<meta name="description" content="Curso de Bases de Datos Espaciales con PostGIS 2.0">
+		<meta name="author" content="geomati.co">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.min.css">
+		<link rel="stylesheet" href="../css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element between this containers is displayed as a slide -->
+<div class="slides">
+    <section>
+        <h1>
+            <br>
+        </h1>
+<h1>
+        <br>
+    </h1>
+<h1 class="absolute-element" style="position: absolute; width: 952px; height: 731px; z-index: 4; left: 4px; top: 2px;">PostgreSQL<a href="http://www.postgresql.org/" target="_blank"><img src="img/PostgreSQL_Logo.png"></a>
+</h1>
+<div>
+    <br>
+</div>
+</section>
+<section>
+    <h2>Objetivos</h2>
+<div>
+    <br>
+</div>
+<div>
+<br>
+</div>
+<div>
+<ul>
+<li>¿Qué es PostgreSQL?</li>
+<li>Características principales</li>
+<li>Instalación</li>
+<li>Clientes</li>
+<li>Psql</li>
+<li>PgAdmin III</li>
+</ul>
+</div>
+</section>
+<section>
+    <h2>¿Qué es PostgreSQL?</h2>
+<div>
+<br>
+    <br>
+</div>
+<div>
+    <ul>
+<li>PostgreSQL es un sistema de gestión de bases de datos objeto-relacional</li>
+<li>Distribuido bajo licencia BSD y con su código fuente disponible libremente.&nbsp;</li>
+<li>Es el sistema de gestión de bases de datos de código abierto más potente del mercado y en sus últimas versiones no tiene nada que envidiarle a otras bases de datos comerciales.</li>
+</ul>
+</div>
+</section>
+<section>
+    <h2>¿Qué es PostgreSQL?</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>Utiliza un modelo <b>cliente/servidor</b>
+    <br>
+</div>
+</section>
+<section>
+    <h2>¿Qué es PostgreSQL?</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <ul>
+            <li>
+                <b>Aplicación cliente</b>: Esta es la aplicación cliente que utiliza PostgreSQL como administrador de bases de datos. La conexión puede ocurrir via TCP/IP ó sockets locales.</li>
+                <li>
+                    <b>Ficheros de configuración</b>: Los 3 ficheros principales de configuración utilizados por PostgreSQL, <i>postgresql.conf</i>, <i>pg_hba.conf</i> y <i>pg_ident.conf</i>
+                </li>
+                <li>
+                    <b>Disco</b>: Disco físico donde se almacenan los datos y toda la información necesaria para que PostgreSQL funcione</li>
+                </ul>
+            </div>
+        </section>
+        <section>
+            <h2>Instalación</h2>
+            <div>
+                <br>
+            </div>
+            <div class="absolute-element" style="position: absolute; width: 952px; height: 590px; z-index: 4; left: 1px; top: 118px;">
+                <img src="img/lego-workers.jpg">
+                <br>
+            </div>
+        </section>
+        <section>
+            <h2>instalación</h2>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <ul>
+                    <li>Desde repositorios</li>
+                    <li>Compilando código fuente</li>
+                    <li>Instalación en Windows</li>
+                </ul>
+            </div>
+        </section>
+        <section>
+            <h2>Desde repositorios Debian</h2>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>$ sudo apt-get install postgresql<br>
+            </div>
+        </section>
+        <section>
+            <h2>Estructura de la instalación</h2>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <ul>
+                    <li>
+                        <i>/usr/lib/postgresql/9.1</i> → ejecutables y librerías</li>
+                        <li>
+                            <i>/usr/share/postgresql/9.1</i> → archivos sql para creación estructura</li>
+                            <li>
+                                <i>/usr/share/postgresql-common</i> → herramientas comunes para administración</li>
+                                <li>
+                                    <i>/var/lib/postgresql/9.1</i>
+                                </li>
+                                <li>
+                                    <i>/etc/postgresql/9.1/main</i>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>manejo del servicio</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>$ sudo service postgresql [start | stop | restart]<br>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>/etc/postgresql/9.1/main</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <div>En esta localización se encuentran los archivos necesarios para la configuración:</div>
+                            <div>
+                                <br>
+                            </div>
+                            <div>
+                                <ul>
+                                    <li>
+                                        <span style="text-align: center;">pg_hba.conf</span>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <span style="text-align: center;">postgresql.conf</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <br>
+                            </div>
+                            <div>pg_hba.conf es el archivo de configuración de la autentificación de PostgreSQL</div>
+                            <div>postgresql.conf es el archivo de configuración de PostgreSQL</div>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Configuración accesos</h2>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <div>Lo primero es configurar el servidor para que acepte conexiones de red.&nbsp;</div>
+                            <div>Para ello modificaremos el archivo <i>pg_hba.conf</i>
+                        </div>
+                    </div>
+                    <div>
+                        <i>
+                        <br>
+                    </i>
+                </div>
+                <div>
+                    <i>
+                    <font style="font-size: 24px;">[Tipo de conexion][database][usuario][IP][Netmask][Tipo de autentificacion][opciones]</font>
+                    <br>
+                </i>
+            </div>
+            <div>
+                <i>
+                <font style="font-size: 24px;">
+                    <br>
+                </font>
+            </i>
+        </div>
+        <div>
+            <i>
+            <font style="font-size: 24px;">local &nbsp; &nbsp; all &nbsp; &nbsp; &nbsp; postgres &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;md5</font>
+        </i>
+    </div>
+</section>
+<section>
+    <h2 style="font-style: normal; font-variant: normal;">CONFIGURACIÓN ACCESOS</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>Una vez definida la regla de acceso a nuestro servidor, le indicaremos las interfaces en las que puede escuchar el servidor. Para ello modificaremos el parámetro `listen_address` en el archivo `<i>postgresql.conf</i>` de la siguiente manera:</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i>
+            <span class="Apple-tab-span" style="white-space: pre;">	</span>listen_address = '*'</i>
+        </div>
+        <div>
+            <span class="Apple-tab-span" style="white-space:pre">	</span>
+        </div>
+        <div>En los parámetros de seguridad, activaremos la encriptación de las claves de usuario modificando en el mismo archivo:</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i>
+            <b>
+            <span class="Apple-tab-span" style="white-space:pre">	</span>password_encryption = on</b>
+        </i>
+    </div>
+</div>
+</section>
+<section>
+    <section>
+        <h2>clientes</h2>
+        <div>
+            <br>
+        </div>
+        <div>psql<br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>psql - PostgreSQL interactive terminal, es un cliente tipo terminal para la gestión de PostgreSQL<br>
+        </div>
+        <div>
+            <a href="http://www.postgresql.org/docs/9.2/static/app-psql.html" target="_blank"><img src="img/psql.png" style="width: 676.8581061830498px; height: 289.99911558891586px; max-height: none; max-width: none;"></a>
+            <br>
+        </div>
+    </section>
+    <section>
+        <h2>Preparar acceso</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <div>Disponemos de usuario <i>
+                <b>postgres</b>
+                </i> creado por la instalación en el sistema</div>
+                <div>
+                    <br>
+                </div>
+                <div>La instalación crea en el servidor la base de datos <b>
+                    <i>postgres</i>
+                </b> y el usuario superadministrador <i>
+                <b>postgres</b>
+            </i>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>preparar acceso</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>Asignamos una clave al usuario postgres del sistema</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i>$ su passwd postgres</i>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Accedemos mediante psql al servidor y modificamos password de postgres</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i>$ su postgres</i>
+        </div>
+        <div>
+            <i>$ psql</i>
+        </div>
+        <div>
+            <i>=# alter user postgres with password '&lt;una_password&gt;';</i>
+        </div>
+    </div>
+</section>
+<section>
+    <h2 class="absolute-element" style="position: absolute; width: 219px; height: 67px; z-index: 4; left: 368px; top: 20px;">Opciones</h2>
+    <div>
+        <br>
+    </div>
+    <div class="absolute-element" style="position: absolute; width: 947px; height: 556.580901856764px; z-index: 4; left: 3px; top: 125px; max-height: none; max-width: none;">
+        <div>
+            <ul>
+                <li>
+                    <span style="text-align: center;">
+                        <i>psql -d nombre_base_de_datos</i> accederá a la base de datos que le indiquemos</span>
+                        <br>
+                    </li>
+                    <li>
+                        <span style="text-align: center;">
+                            <i>psql -f ruta_a_archivo</i> utiliza las sentencias que se encuentren dentro del archivo</span>
+                            <br>
+                        </li>
+                        <li>
+                            <span style="text-align: center;">
+                                <i>psql -h</i> <i>nombre_servidor</i> se conecta al servidor que le indiquemos</span>
+                                <br>
+                            </li>
+                            <li>
+                                <span style="text-align: center;">
+                                    <i>psql -p puerto se conecta</i> a la instancia de |PG| a través del puerto indicado</span>
+                                    <br>
+                                </li>
+                                <li>
+                                    <span style="text-align: center;">
+                                        <i>psql -l</i> muestra un listado de las bases de datos de la instancia</span>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <span style="text-align: center;">
+                                            <i>psql -U</i> nombre_usuario se conecta usando el usuario indicado</span>
+                                            <br>
+                                        </li>
+                                        <li>
+                                            <span style="text-align: center;">
+                                                <i>psql -V</i> muestra la versión de psql</span>
+                                                <br>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </section>
+                            <section>
+                                <h2>Opciones</h2>
+                                <div>
+                                    <br>
+                                </div>
+                                <div>
+                                    <br>
+                                </div>
+                                <div>
+                                    <br>
+                                </div>
+                                <div>
+                                    <br>
+                                </div>
+                                <div>
+                                    <font style="font-size: 54px;">
+                                        <b>$ psql --help</b>
+                                    </font>
+                                    <br>
+                                </div>
+                            </section>
+                            <section>
+                                <h2>algunas funciones</h2>
+                                <div>
+                                    <br>
+                                </div>
+                                <div>
+                                    <br>
+                                </div>
+                                <div>
+                                    <div style="text-align: center;">
+                                        <ul>
+                                            <li>
+                                                <span style="text-align: center;">
+                                                    <b>select version()</b>; nos indicará la versión del servidor que tenemos instalada</span>
+                                                    <br>
+                                                </li>
+                                                <li>
+                                                    <span style="text-align: center;">
+                                                        <b>\l</b> muestra un listado de las bases de datos</span>
+                                                        <br>
+                                                    </li>
+                                                    <li>
+                                                        <span style="text-align: center;">
+                                                            <b>select * from pg_user</b>; nos muestra todos los usuarios del sistema</span>
+                                                            <br>
+                                                        </li>
+                                                        <li>
+                                                            <span style="text-align: center;">
+                                                                <b>select * from pg_tables</b>; muestra todas las tablas incluidas las del sistema</span>
+                                                                <br>
+                                                            </li>
+                                                            <li>
+                                                                <span style="text-align: center;">
+                                                                    <b>\c</b> database cambia de base de datos</span>
+                                                                    <br>
+                                                                </li>
+                                                                <li>
+                                                                    <span style="text-align: center;">
+                                                                        <b>\dn</b> muestra todos los esquemas de la base de datos</span>
+                                                                        <br>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div>
+                                                                <br>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <br>
+                                                        </div>
+                                                    </section>
+                                                </section>
+                                                <section>
+                                                    <h2>ALGUNAS funciones</h2>
+                                                    <div>
+                                                        <br>
+                                                    </div>
+                                                    <div>
+                                                        <div style="font-size: 36.47214889526367px; font-variant: normal;">
+                                                            <ul>
+                                                                <li style="font-style: normal;">
+                                                                    <span style="text-align: center;">
+                                                                        <b>\dt </b>muestra las tablas, acepta expresiones para filtrar por ejemplo, \dt p* todas las tablas que empiezan por p</span>
+                                                                        <br>
+                                                                    </li>
+                                                                    <li style="font-style: normal;">
+                                                                        <span style="text-align: center;">
+                                                                            <b>\du</b> listado de usuarios/grupos y roles</span>
+                                                                            <br>
+                                                                        </li>
+                                                                        <li style="font-style: normal;">
+                                                                            <span style="text-align: center;">
+                                                                                <b>\d</b> tabla columnas, y tipos de datos de la tabla</span>
+                                                                                <br>
+                                                                            </li>
+                                                                            <li>
+                                                                                <span style="text-align: center;">
+                                                                                    <b>\i </b>ruta_archivo ejecuta las sentencias de un archivo</span>
+                                                                                    <br>
+                                                                                </li>
+                                                                                <li style="font-style: normal;">
+                                                                                    <span style="text-align: center;">
+                                                                                        <b>\o</b> ruta_archivo devuelve los datos a un archivo</span>
+                                                                                        <br>
+                                                                                    </li>
+                                                                                    <li style="font-style: normal;">
+                                                                                        <span style="text-align: center;">
+                                                                                            <b>\conninfo</b> muestra la información de la conexión</span>
+                                                                                            <br>
+                                                                                        </li>
+                                                                                        <li style="font-style: normal;">
+                                                                                            <span style="text-align: center;">
+                                                                                                <b>\encoding codificación</b> fija la codificación del sistema, o sin parámetro la muestra</span>
+                                                                                                <br>
+                                                                                            </li>
+                                                                                            <li style="font-style: normal;">
+                                                                                                <span style="text-align: center;">
+                                                                                                    <b>\q</b> sale de la consola ``psql``</span>
+                                                                                                    <br>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </section>
+                                                                                <section>
+                                                                                    <h2>algunas funciones</h2>
+                                                                                    <div>
+                                                                                        <br>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <br>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <br>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <br>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <font style="font-size: 112px;">\?</font>
+                                                                                        <br>
+                                                                                    </div>
+                                                                                </section>
+                                                                                <section>
+                                                                                    <h2 class="absolute-element" style="position: absolute; width: 818px; height: 391px; z-index: 4; left: 80px; top: 165px;">PgAdmin III<a href="http://www.pgadmin.org/" target="_blank"><img src="img/pgadmin.png"></a>
+                                                                                    </h2>
+                                                                                    <div>
+                                                                                        <br>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <br>
+                                                                                    </div>
+                                                                                </section>
+                                                                                <section>
+                                                                                    <h2>pgadmin3</h2>
+                                                                                    <div>
+                                                                                        <br>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <br>
+                                                                                    </div>
+                                                                                    <div>pgAdmin es el más popular software para la administración de PostgreSQL a través de entorno gráfico. Se puede utilizar para el manejo de las versiones de 7.3 en adelante. Soporta todas las funcionalidades de PostgreSQL y permite una administración más sencilla de este. Incluye un editor de SQL desde el que se pueden realizar las consultas.<br>
+                                                                                    </div>
+                                                                                </section>
+                                                                                <section>
+                                                                                    <h2>instalacion</h2>
+                                                                                    <div>
+                                                                                        <br>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <br>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <br>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <br>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <br>
+                                                                                    </div>
+                                                                                    <div>$ sudo apt-get install pgadmin3<br>
+                                                                                    </div>
+                                                                                </section>
+                                                                                <section>
+                                                                                    <h2>arranque</h2>
+                                                                                    <div>
+                                                                                        <img src="img/pgadmin-1.png" style="width: 861.0438780621473px; height: 470.52519870120585px; max-height: none; max-width: none;">
+                                                                                        <br>
+                                                                                    </div>
+                                                                                </section>
+                                                                                <section>
+                                                                                    <h2>añadir conexión</h2>
+                                                                                    <div class="absolute-element" style="position: absolute; width: 683px; height: 590.42175066313px; z-index: 4; left: 235px; top: 98px; max-height: none; max-width: none;">
+                                                                                        <img src="img/pgadmin-2.png">
+                                                                                        <br>
+                                                                                    </div>
+                                                                                    <div class="absolute-element" style="position: absolute; width: 125px; height: 87px; z-index: 4; left: 54px; top: 140px;">
+                                                                                        <img src="img/pgadmin-3.png">
+                                                                                        <br>
+                                                                                    </div>
+                                                                                </section>
+                                                                                <section>
+                                                                                    <h2>SQL Editor</h2>
+                                                                                    <div class="absolute-element" style="position: absolute; width: 756px; height: 387.94783377542px; z-index: 4; left: 67px; top: 210px; max-height: none; max-width: none;">
+                                                                                        <img src="img/pgadmin-5.png" style="width: 829.0511254881402px; height: 414.15561426265594px; max-height: none; max-width: none;">
+                                                                                        <br>
+                                                                                    </div>
+                                                                                    <div class="absolute-element" style="position: absolute; width: 133px; height: 84px; z-index: 4; left: 57px; top: 123px;">
+                                                                                        <img src="img/pgadmin-4.png">
+                                                                                        <br>
+                                                                                    </div>
+                                                                                </section>
+                                                                            </div>
+
+			<!-- Any section element between this container is displayed as a slide -->
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>			
