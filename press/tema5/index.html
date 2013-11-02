@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Tema 1 - Teoría de Bases de Datos</title>
+
+		<meta name="description" content="Curso de Bases de Datos Espaciales con PostGIS 2.0">
+		<meta name="author" content="geomati.co">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.min.css">
+		<link rel="stylesheet" href="../css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element between this containers is displayed as a slide -->
+			
+<div class="slides">
+    <section>
+        <h1>
+            <br>
+        </h1>
+        <h1>
+            <br>
+        </h1>
+        <h1>Simple Feature Model</h1>
+    </section>
+    <section>
+        <h2>Objetivos</h2>
+        <div>
+            <div>
+                <ul>
+                    <li>
+                        <span style="text-align: center;">Entender la necesidad por la que se creó el estándar Simple Feature Access de OGC, y otros estándares derivados: WKT.</span>
+                        <br>
+                    </li>
+                    <li>
+                        <span style="text-align: center;">Conocer las principales características estáticas del modelo OGC: la clase Geometry y sus subtipos: Point, LineString, Polygon, GeometryCollection, etc.</span>
+                        <br>
+                    </li>
+                    <li>
+                        <span style="text-align: center;">Conocer las principales características dinámicas del modelo OGC: predicados espaciales y funciones de análisis espacial.</span>
+                        <br>
+                    </li>
+                    <li>
+                        <span style="text-align: center;">Conocer la implementación SQL de éste modelo, seguida en mayor o menor grado por las principales bases de datos espaciales.</span>
+                        <br>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div>
+            <br>
+        </div>
+    </section>
+    <section>
+        <h2>Incompatibilidades del modelo vectorial</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <div>Desde la aparición de los SIG, han ido apareciendo distintos paquetes de software que siguen el paradigma vectorial.</div>
+            <div>
+                <br>
+            </div>
+            <div>Estos paquetes han hecho sus propias implementaciones, a menudo no completamente compatibles unas con otras, de las tipos primitivos geométricos que sirven para modelar la componente espacial del dato geográfico.</div>
+        </div>
+    </section>
+    <section>
+        <h2>
+            <br>
+        </h2>
+        <div>
+            <ul>
+                <li>
+                    <span style="text-align: center;">También han diferido en cómo han gestionado las relaciones de vecindad (topología) entre entidades geométricas, o en el comportamiento de éstas (funcionalidades de análisis).</span>
+                </li>
+                <li>
+                    <span style="text-align: center;">Para poder usar información almacenada según un determinado “submodelo vectorial”, en un paquete de software que hace uso de otro submodelo vectorial distinto, sean necesarias la realización de operaciones de cambio de formato (transformación entre formatos).</span>
+                    <br>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section>
+        <h2>Incompatibilidades del modelo vectorial</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <div style="text-align: left; ">
+                <b>
+                <i>Arc/Info y el modelo vectorial de Cobertura.</i>
+            </b>
+        </div>
+        <div style="text-align: left; ">Arc/Info fue lanzado en 1982 (aunque hoy se conserve el nombre para la gama superior del producto ArcGIS Desktop).</div>
+        <div style="text-align: left; ">Introduce un subtipo del modelo vectorial.</div>
+        <img src="img/arcinfo.png" style="text-align: center;">
+    </div>
+</section>
+<section>
+    <h2>Incompatibilidades del modelo vectorial</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div style="text-align: left; ">
+            <b>Autocad y el modelo CAD de los formatos DXF y DWG</b>
+        </div>
+        <div style="text-align: left; ">Ofrecen un modelo “más completo”, en el que incorporan superficies matemáticas, de mayor complejidad que el simple modelado basado en puntos, líneas y polígonos.</div>
+    </div>
+    <div style="text-align: left; position: absolute; width: 436px; height: 259px; z-index: 4; left: 503px; top: 425px;" class="absolute-element">
+        <img src="img/autocad.png">
+        <br>
+    </div>
+</section>
+<section>
+    <h2>Incompatibilidades del modelo vectorial</h2>
+    <div>
+        <br>
+    </div>
+    <div class="absolute-element" style="position: absolute; width: 952px; height: 325px; z-index: 4; left: 12px; top: 173px;">
+        <div style="text-align: left; ">
+            <b>
+            <i>ArcView y el formato Shapefile.</i>
+        </b>
+    </div>
+    <div style="text-align: left; ">Por los mismos desarrolladores de Arc/Info, fue lanzado en 1995.</div>
+    <div style="text-align: left; ">A partir de la versión 2, introdujo el formato Shapefile.</div>
+    <div style="text-align: left; ">El submodelo Shp maneja geometrías</div>
+    <div style="text-align: left; ">múltiples, huecos, superficies irregulares</div>
+    <div style="text-align: left; ">(multipatch), etc</div>
+</div>
+<div style="text-align: left; position: absolute; width: 291.43854995579136px; height: 264px; z-index: 4; left: 625px; top: 389px; max-height: none; max-width: none;" class="absolute-element">
+    <img src="img/shapefile.png">
+    <br>
+</div>
+</section>
+<section>
+    <h2>Incompatibilidades del modelo vectorial</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div class="absolute-element" style="position: absolute; width: 952px; height: 475.48010610079575px; z-index: 4; left: -9px; top: 165px; max-height: none; max-width: none;">
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Tanta “fragmentación” en las implementaciones del modelo vectorial trae problemas</div>
+    </div>
+</section>
+<section>
+    <h2>
+        <img src="img/babel-brueghel-2.jpg" style="width: 726.932964086571px; height: 599.6852340681378px; max-height: none; max-width: none;">
+        <br>
+    </h2>
+</section>
+<section>
+    <h2>
+        <br>
+    </h2>
+    <div class="absolute-element" style="position: absolute; width: 968px; height: 279px; z-index: 4; left: -8px; top: 117px;">La necesidad de hacer una “transformación” o “mapeo” entre implementaciones del modelo vectorial, transformaciones que en ocasiones no pueden hacerse sin que se pierda parte de la información contenida.&nbsp;<br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div class="absolute-element" style="position: absolute; width: 968px; height: 186px; z-index: 4; left: -2px; top: 386px;">La propia imposibilidad de utilizar la base de datos generada en un paquete desde otro producto software, en el caso de que los formatos no sean abiertos. Hemos visto que Shp o Dxf son formatos abiertos (Dxf parcialmente), pero DWG o DGN no.<br>
+    </div>
+</section>
+<section>
+    <h2>El estándar SFA de OGC (ISO 19125)</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>Tiene como objetivo conseguir la “Interoperabilidad Semántica”: la reutilización de los datos vectoriales generados por distintos paquetes software, sin que se produzcan pérdidas por la falta de correspondencia entre las implementaciones del modelo vectorial empleadas.<br>
+    </div>
+</section>
+<section>
+    <h2>
+        <br>
+    </h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>La norma Simple Feature Access, (elevado a norma ISO bajo la identificación ISO 19125), es un modelo de datos orientado a objetos en el que se especifica cómo se debe implementar el paradigma vectorial para modelar la realidad con la información gestionada por un SIG. &nbsp;<br>
+    </div>
+</section>
+<section>
+    <h2>El estándar SFA de OGC (ISO 19125)</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>OGC no solo definió una especificación abstracta del modelo vectorial, además:</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <ul>
+                <li>
+                    <span style="text-align: center;">Definió dos modelos de representación externa de la componente espacial del dato geográfico: los estándares WKT y WKB (elevados a norma ISO &nbsp;ISO/IEC 13249-3:2011).</span>
+                    <br>
+                </li>
+                <li>
+                    <span style="text-align: center;">Un formato de intercambio de IG: GML</span>
+                </li>
+                <li>
+                    <span style="text-align: center;">Un esquema “genérico” de cómo se debería implementar el modelo vectorial definido por la norma SFA en una base de datos SQL: SFA para SQL.</span>
+                    <br>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>Dimensión</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>Una entidad puntual tendrá dimensión 0</div>
+        <div>Una entidad lineal tendrá dimensión 1</div>
+        <div>Una entidad superficial tendrá dimensión 2</div>
+        <div>
+            <br>
+        </div>
+        <div>ST_Dimension(geometría) devolverá el valor de la dimensión</div>
+        <div>
+            <br>
+        </div>
+        <div>Una geometry collection tendrá la dimensión más alta de las geometrías que la componen</div>
+    </div>
+</section>
+<section>
+    <h2>DIMENSIÓN</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>No confundir la dimensión de una geometría con las dimensiones de las coordenadas que la componen. Esta indica la dimensión de las coordenadas de los vértices que las componen:</div>
+        <div>X,Y = 2</div>
+        <div>X,Y,Z = 3</div>
+        <div>…</div>
+        <div>
+            <br>
+        </div>
+        <div>ST_CoordDim(geometria) devuelve este valor de las dimensiones</div>
+    </div>
+</section>
+<section>
+    <h2>Interior, contorno y exterior</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <img src="img/contorno.png">
+        <br>
+    </div>
+</section>
+<section>
+    <h2 style="font-style: normal; font-variant: normal;">INTERIOR, CONTORNO Y EXTERIOR</h2>
+    <div>
+        <br>
+    </div>
+    <img src="img/punto.png" class="absolute-element" style="position: absolute; max-height: none; max-width: none; width: 301px; height: 197px; z-index: 4; left: 23px; top: 152px;">
+    <img src="img/linea.png" class="absolute-element" style="position: absolute; max-height: none; max-width: none; width: 304px; height: 200px; z-index: 4; left: 518px; top: 260px;">
+    <img src="img/poligono.png" class="absolute-element" style="position: absolute; max-height: none; max-width: none; width: 301px; height: 197px; z-index: 4; left: 137px; top: 421px;">
+</section>
+<section>
+    <h2>El estándar SFA de OGC (ISO 19125)</h2>
+    <div>
+        <br>
+    </div>
+    <div class="absolute-element" style="position: absolute; width: 952px; height: 568px; z-index: 4; left: -3px; top: 120px;">
+        <img src="img/ogc-sfa.png">
+        <br>
+    </div>
+</section>
+<section>
+    <h2>El estándar SFA de OGC (ISO 19125)</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>La clase clave de toda la jerarquía de clases del modelo es la clase abstracta Geometry.</div>
+        <div>La clase abstracta Geometry representa una estructura común (propiedades) y un comportamiento común (métodos) a todos los subtipos geométricos de la implementación que del paradigma vectorial hace el estándar ISO/OGC SFA.</div>
+    </div>
+</section>
+<section>
+    <h2>
+        <br>
+    </h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>Los métodos definidos por la clase Geometry, y que por tanto deben ser implementados por las clases que hereden esta clase abstracta, se pueden clasificar en tres tipos:</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <ul>
+                <li>
+                    <span style="text-align: center;">Métodos básicos.</span>
+                    <br>
+                </li>
+                <li>
+                    <span style="text-align: center;">Métodos para chequear relaciones espaciales entre objetos geométricos (predicados espaciales).</span>
+                    <br>
+                </li>
+                <li>
+                    <span style="text-align: center;">Métodos para realizar análisis espacial.</span>
+                    <br>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>El estándar SFA de OGC (ISO 19125)</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div class="absolute-element" style="position: absolute; width: 773px; height: 596.3183023872679px; z-index: 4; left: 85px; top: 95px; max-height: none; max-width: none;">
+        <img src="img/geometry_operations.png">
+        <br>
+    </div>
+</section>
+<section>
+    <h2>clase geometry</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>
+            <b>Clase Geometry</b>: Los métodos básicos ofrecen funciones para obtener propiedades básicas de la geometría: si es simple o no, superficie y perímetro, coordenadas de sus vértices (en caso de que su dimensión sea superior a 0), mínimo rectángulo que la envuelve, etc.</div>
+            <div>
+                <br>
+            </div>
+            <div>Los métodos ST_AsText() y ST_AsBinary(), permiten obtener la representación externa de una instancia u objeto de la clase Geometry según los estándares WKT o WKB.</div>
+        </div>
+    </section>
+    <section>
+        <h2>WKT</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>WKT es el acrónimo en inglés de Well Known Text, que se puede definir como una codificación o sintaxis diseñada específicamente para describir objetos espaciales expresados de forma vectorial. Los objetos que es capaz de describir son: puntos, multipuntos, líneas, multilíneas, polígonos, multipolígonos, colecciones de geometría y puntos en 3 y 4 dimensiones.<br>
+        </div>
+    </section>
+    <section>
+        <h2>WKT</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>A efectos prácticos la sintaxis WKT consta de una descripción de los vértices que componen la geometría. Para que esta forma de especificar las geometrías tengan sentido deben de acompañarse de una indicación de la referencia espacial o proyección cartográfica utilizada en dicho vector.<br>
+        </div>
+    </section>
+    <section>
+        <h2>WKT</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div class="absolute-element" style="position: absolute; width: 555px; height: 611.0548187444739px; z-index: 4; left: 194px; top: 83px; max-height: none; max-width: none;">
+            <img src="img/wkt.png" style="width: 463.1152966808316px; height: 564.5269670478018px; max-height: none; max-width: none;">
+            <br>
+        </div>
+    </section>
+    <section>
+        <h2>WKB</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>WKB acrónimo de Well Known Binary es la variante de este lenguaje, pero expresada de forma binaria, también utilizada por los gestores espaciales, pero con la ventaja de que al ser compilada en forma binaria la velocidad de proceso es muy elevada.<br>
+        </div>
+    </section>
+    <section>
+        <h2>Operaciones</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <div>
+                <i>ST_astext(geometria)</i>
+            </div>
+            <div>
+                <i>ST_binary(geometria)</i>
+            </div>
+            <div>
+                <i>ST_GeometryFromText(text,srid)</i>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>Definiciones</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <b>Point y Multipoint</b>
+            <br>
+        </div>
+        <div>
+            <div>
+                <b>
+                <br>
+            </b>
+        </div>
+        <div>Geometrias con 0 dimensiones</div>
+        <div>El contorno es el conjunto vacio</div>
+        <div>Una geometría Multipoint es simple si no tiene ningún punto repetido</div>
+    </div>
+</section>
+<section>
+    <h2>definiciones</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>
+            <b>Linestring</b>
+        </div>
+        <div>
+            <b>
+            <br>
+        </b>
+    </div>
+    <div>Geometrias de 1 dimensión</div>
+    <div>Simple si no pasa por el mismo punto dos veces</div>
+    <div>Cerrada si su punto inicial y final es el mismo</div>
+    <div>El contorno si es cerrada es el conjunto vacio</div>
+    <div>El contorno si no es cerrada son su punto final e inicial</div>
+    <div>Si es simple y cerrada es un anillo (Ring)</div>
+</div>
+</section>
+<section>
+    <h2>definiciones</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <b>Multilinestring</b>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Geometrías de 1 dimensión</div>
+        <div>Cerrada si todos sus elementos son cerrados</div>
+        <div>Si es cerrada su contorno es el conjunto vacio</div>
+    </div>
+    <div>
+        <br>
+    </div>
+</section>
+<section>
+    <h2>definiciones</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>
+            <b>Polygon</b>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Geometrías de 2 dimensiones</div>
+        <div>Contiene un único interior conectado</div>
+        <div>Tiene un anillo exterior y 0 o más anillos interiores</div>
+        <div>El contorno es un conjunto de lineas cerradas que se corresponden con sus contornos exterior e interior</div>
+    </div>
+</section>
+<section>
+    <h2>definiciones</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>
+            <b>Multipolygon</b>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>El interior de cualquiera de las superficies que contiene no puede intersecar</div>
+        <div>El contorno de cualquiera de las superficies que contiene puede intersecar pero solo en un número finito de puntos</div>
+        <div>Son simples</div>
+    </div>
+</section>
+<section>
+    <h2>métodos básicos</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>
+            <i>st_issimple(geometria)</i>
+        </div>
+        <div>
+            <i>st_isvalid(geometria)</i>
+        </div>
+        <div>
+            <i>st_isvalidreason(geometria)</i>
+        </div>
+        <div>
+            <i>st_isvaliddetail(geometria)</i>
+        </div>
+        <div>
+            <i>st_dimension(geometria)</i>
+        </div>
+        <div>
+            <i>st_isclosed(geometria)</i>
+        </div>
+        <div>
+            <i>st_numinteriorrings(geometria)</i>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>predicados espaciales</h2>
+    <div>
+        <div>
+            <b>Clase Geometry</b>: métodos para el chequeo de predicados espaciales.</div>
+            <div>
+                <br>
+            </div>
+            <div>Verifican el cumplimiento de determinados predicados geográficos entre dos geometrías distintas.&nbsp;</div>
+            <div>
+                <br>
+            </div>
+            <div>Los predicados geográficos toman dos geometrías como argumento, y devuelven un valor booleano que indica si ambas geometrías cumplen o no una determinada relación espacial</div>
+            <div>
+                <br>
+            </div>
+            <div>Las principales relaciones espaciales contempladas son <i>equals, disjoint, intersects, touches, crosses, within, contains, overlaps</i>.&nbsp;</div>
+        </div>
+    </section>
+    <section>
+        <h2>predicados espaciales</h2>
+        <div>
+            <br>
+        </div>
+        <div class="absolute-element" style="position: absolute; width: 837px; height: 590px; z-index: 4; left: 68px; top: 99px;">
+            <img src="img/predicados.png">
+            <br>
+        </div>
+    </section>
+    <section>
+        <h2 class="absolute-element" style="position: absolute; width: 434px; height: 67px; z-index: 4; left: 262px; top: 20px;">análisis espacial</h2>
+        <div class="absolute-element" style="position: absolute; width: 968px; height: 565px; z-index: 4; left: -6px; top: 122px;">
+            <div>
+                <b>Clase Geometry</b>: métodos para realizar análisis espacial.</div>
+                <div>Reciben una o más geometrías como parámetro, y devuelven una nueva geometría complemente distinta de las anteriores (o un valor número que mide una determinada propiedad).<img src="img/analisis.png">
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>SQL</h2>
+            <div>
+                <br>
+            </div>
+            <div>El esquema SQL para implementar la norma SFA.<br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>El estándar ISO 19125 da un paso más y define un esquema SQL que dé soporte al almacenamiento, recuperación, consulta y actualización de items geográficos con componente espacial, haciendo uso de un interfaz de llamadas SQL.<br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>Es de destacar que ambas implementaciones (tipos primitivos o tipos geométricos) introducen dos tablas de metadatos del sistema: Geometry_Columns y Spatial_Reference_Sys.<br>
+            </div>
+        </section>
+    </div>
+
+			<!-- Any section element between this container is displayed as a slide -->
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>			
