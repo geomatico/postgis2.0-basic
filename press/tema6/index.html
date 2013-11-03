@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Tema 1 - Teoría de Bases de Datos</title>
+
+		<meta name="description" content="Curso de Bases de Datos Espaciales con PostGIS 2.0">
+		<meta name="author" content="geomati.co">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.min.css">
+		<link rel="stylesheet" href="../css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element between this containers is displayed as a slide -->
+			<div class="slides">
+    <section>
+        <h1>
+            <br>
+        </h1>
+        <h1>
+            <span style="font-size: 135.72px;">Importación y exportación de datos</span>
+            <br>
+        </h1>
+    </section>
+    <section>
+        <h2>Objetivos</h2>
+        <div>
+            <div>Conocer las herramientas de importación y exportación de las que dispone PosGIS</div>
+            <div>shp2pgsql</div>
+            <div>pgsql2shp</div>
+            <div>shp2pgsql-gui</div>
+            <div>ogrinfo</div>
+            <div>ogr2ogr</div>
+            <div>osm2psql</div>
+            <div>
+                <br>
+            </div>
+            <div>Importar datos desde shape a PostGIS y exportar esos datos.</div>
+            <div>Importar datos OSM</div>
+            <div>Importar datos mediante ogr</div>
+        </div>
+    </section>
+    <section>
+        <h2>QGIS<img src="img/QGis_Logo.png" style="width: 557.6607275905301px; height: 595.2643675783058px; max-height: none; max-width: none;">
+        </h2>
+    </section>
+    <section>
+        <h2>shp2pgsql</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Convierte archivos ESRI Shape en SQL preparado para la inserción en la base de datos<br>
+        </div>
+    </section>
+    <section>
+        <h2>shp2psql</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i>$ shp2pgsql [&lt;opciones&gt;] &lt;ruta_shapefile&gt; [&lt;esquema&gt;.]&lt;tabla&gt;</i>
+            <br>
+        </div>
+    </section>
+    <section>
+        <h2>COMANDOS</h2>
+        <div>
+            <div style="text-align: left; ">
+                <font style="font-size: 24px;">
+                    <b>-s &lt;srid&gt;</b> Asigna el sistema de coordenadas. Por defecto será -1</font>
+                </div>
+                <div style="text-align: left; ">
+                    <font style="font-size: 24px;">
+                        <b>(-d|a|c|p)</b>
+                    </font>
+                </div>
+                <div style="text-align: left; ">
+                    <font style="font-size: 24px;">
+                        <b>-d</b> Elimina la tabla, la recrea y la llena con los datos del shape</font>
+                    </div>
+                    <div style="text-align: left; ">
+                        <font style="font-size: 24px;">
+                            <b>-a </b>Llena la tabla con los datos del shape. Debe tener el mismo esquema exactamente</font>
+                        </div>
+                        <div style="text-align: left; ">
+                            <font style="font-size: 24px;">
+                                <b>-c </b>Crea una nueva tabla y la llena con los datos. opción por defecto.</font>
+                            </div>
+                            <div style="text-align: left; ">
+                                <font style="font-size: 24px;">
+                                    <b>-p</b> Modo preparar, solo crea la tabla</font>
+                                </div>
+                                <div style="text-align: left; ">
+                                    <font style="font-size: 24px;">
+                                        <b>-g &lt;geocolumn&gt;</b> Especifica el nombre de la columna geometría (usada habitualmente en modo -a)</font>
+                                    </div>
+                                    <div style="text-align: left; ">
+                                        <font style="font-size: 24px;">
+                                            <b>-D </b>Usa el formato Dump de postgresql</font>
+                                        </div>
+                                        <div style="text-align: left; ">
+                                            <font style="font-size: 24px;">
+                                                <b>-G</b> Usa tipo geografía, requiere datos de longitud y latitud</font>
+                                            </div>
+                                            <div style="text-align: left; ">
+                                                <font style="font-size: 24px;">
+                                                    <b>-k</b> Guarda los identificadores en postgresql</font>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <h2>mas comandos</h2>
+                                            <div>
+                                                <font style="font-size: 24px;">
+                                                    <br>
+                                                </font>
+                                            </div>
+                                            <div>
+                                                <div style="text-align: left; ">
+                                                    <font style="font-size: 24px;">
+                                                        <b>-i </b>Usa int4 para todos los campos integer del dbf</font>
+                                                    </div>
+                                                    <div style="text-align: left; ">
+                                                        <font style="font-size: 24px;">
+                                                            <b>-I</b> Crea un índice spacial en la columna de la geometría</font>
+                                                        </div>
+                                                        <div style="text-align: left; ">
+                                                            <font style="font-size: 24px;">
+                                                                <b>-S</b> Genera geometrías simples en vez de geometrías MULTI</font>
+                                                            </div>
+                                                            <div style="text-align: left; ">
+                                                                <font style="font-size: 24px;">
+                                                                    <b>-w</b> Salida en WKT</font>
+                                                                </div>
+                                                                <div style="text-align: left; ">
+                                                                    <font style="font-size: 24px;">
+                                                                        <b>-W &lt;encoding&gt;</b> Especifica la codificación de los caracteres. (por defecto : “WINDOWS-1252”)</font>
+                                                                    </div>
+                                                                    <div style="text-align: left; ">
+                                                                        <font style="font-size: 24px;">
+                                                                            <b>-N &lt;policy&gt;</b> estrategia de manejo de geometrías NULL (insert*,skip,abort).</font>
+                                                                        </div>
+                                                                        <div style="text-align: left; ">
+                                                                            <font style="font-size: 24px;">
+                                                                                <b>-n </b>Solo importa el archivo DBF</font>
+                                                                            </div>
+                                                                            <div style="text-align: left; ">
+                                                                                <font style="font-size: 24px;">
+                                                                                    <br>
+                                                                                </font>
+                                                                            </div>
+                                                                            <div style="text-align: left; ">
+                                                                                <font style="font-size: 24px;">
+                                                                                    <b>-? </b>Muestra la ayuda</font>
+                                                                                </div>
+                                                                            </div>
+                                                                        </section>
+                                                                        <section>
+                                                                            <h2>pgsql2shp</h2>
+                                                                            <div>
+                                                                                <br>
+                                                                            </div>
+                                                                            <div>
+                                                                                <br>
+                                                                            </div>
+                                                                            <div>
+                                                                                <br>
+                                                                            </div>
+                                                                            <div>
+                                                                                <br>
+                                                                            </div>
+                                                                            <div>Con ella podremos convertir los datos de nuestra base de datos en archivos ESRI Shape<br>
+                                                                            </div>
+                                                                        </section>
+                                                                        <section>
+                                                                            <h2>pgsql2shp</h2>
+                                                                            <div>
+                                                                                <br>
+                                                                            </div>
+                                                                            <div>
+                                                                                <br>
+                                                                            </div>
+                                                                            <div>
+                                                                                <br>
+                                                                            </div>
+                                                                            <div>
+                                                                                <br>
+                                                                            </div>
+                                                                            <div>
+                                                                                <div>
+                                                                                    <i>$ pgsql2shp [&lt;opciones&gt;] &lt;basedatos&gt; [&lt;esquema&gt;.]&lt;tabla&gt;</i>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <i>$ pgsql2shp [&lt;opciones&gt;] &lt;basedatos&gt; &lt;consulta&gt;</i>
+                                                                                </div>
+                                                                            </div>
+                                                                        </section>
+                                                                        <section>
+                                                                            <h2>comandos</h2>
+                                                                            <div>
+                                                                                <br>
+                                                                            </div>
+                                                                            <div>
+                                                                                <br>
+                                                                            </div>
+                                                                            <div>
+                                                                                <div style="text-align: left; ">
+                                                                                    <b>-f &lt;nombrearchivo&gt;</b> &nbsp;Especifica el nombre del archivo a crear</div>
+                                                                                    <div style="text-align: left; ">
+                                                                                        <b>-h &lt;host&gt;</b> &nbsp;Indica el servidor donde realizará la conexión</div>
+                                                                                        <div style="text-align: left; ">
+                                                                                            <b>-p &lt;puerto&gt;</b> &nbsp;Permite indicar el puerto de la base de datos</div>
+                                                                                            <div style="text-align: left; ">
+                                                                                                <b>-P &lt;password&gt;</b> &nbsp;Contraseña</div>
+                                                                                                <div style="text-align: left; ">
+                                                                                                    <b>-u &lt;user&gt;</b> Usuario</div>
+                                                                                                    <div style="text-align: left; ">
+                                                                                                        <b>-g &lt;geometry_column&gt;</b> Columna de geometría que será exportada</div>
+                                                                                                    </div>
+                                                                                                </section>
+                                                                                                <section>
+                                                                                                    <h2>shp2pgsql-gui</h2>
+                                                                                                    <div>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <i>$ shp2pgsql-gui</i>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                </section>
+                                                                                                <section>
+                                                                                                    <h2>GDAL/OGR</h2>
+                                                                                                    <div>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                    <div>GDAL/OGR es una librería de lectura y escritura de formatos geoespaciales, tanto Raster con GDAL como Vectorial con OGR. Se trata de una librería de software libre ampliamente utilizada.<br>
+                                                                                                    </div>
+                                                                                                </section>
+                                                                                                <section>
+                                                                                                    <h2>ogrinfo</h2>
+                                                                                                    <div>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <b>ogrinfo</b> obtiene información de los datos vectoriales. Podremos utilizar esta herramienta para la obtención de esta información de las tablas que tenemos almacenadas en la base de datos<br>
+                                                                                                    </div>
+                                                                                                </section>
+                                                                                                <section>
+                                                                                                    <h2>ogrinfo</h2>
+                                                                                                    <div>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <i>$ ogrinfo [&lt;opciones&gt;] &lt;ruta fuente datos&gt;</i>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                </section>
+                                                                                                <section>
+                                                                                                    <h2>comandos</h2>
+                                                                                                    <div>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <div>
+                                                                                                            <b>-where</b> muestra los datos de las filas que cumplan la clausula</div>
+                                                                                                            <div>
+                                                                                                                <b>-sql</b> filtra la información mediante consultas SQL</div>
+                                                                                                                <div>
+                                                                                                                    <b>-geom={YES/NO/SUMMARY} </b>modifica la visualización de la información de la columna geométrica</div>
+                                                                                                                </div>
+                                                                                                            </section>
+                                                                                                            <section>
+                                                                                                                <h2>ogr2ogr</h2>
+                                                                                                                <div>
+                                                                                                                    <br>
+                                                                                                                </div>
+                                                                                                                <div>
+                                                                                                                    <br>
+                                                                                                                </div>
+                                                                                                                <div>
+                                                                                                                    <br>
+                                                                                                                </div>
+                                                                                                                <div>OGR es capaz de convertir a PostGIS todos los formatos que maneja, y será capaz de exportar desde PostGIS todos aquellos en los que tiene permitida la escritura.<br>
+                                                                                                                </div>
+                                                                                                            </section>
+                                                                                                            <section>
+                                                                                                                <h2>ogr2ogr</h2>
+                                                                                                                <div>
+                                                                                                                    <br>
+                                                                                                                </div>
+                                                                                                                <div>
+                                                                                                                    <br>
+                                                                                                                </div>
+                                                                                                                <div>
+                                                                                                                    <br>
+                                                                                                                </div>
+                                                                                                                <div>
+                                                                                                                    <br>
+                                                                                                                </div>
+                                                                                                                <div>
+                                                                                                                    <i>$ ogr2ogr -formats</i>
+                                                                                                                    <br>
+                                                                                                                </div>
+                                                                                                            </section>
+                                                                                                            <section>
+                                                                                                                <h2>ogr2ogr</h2>
+                                                                                                                <div>
+                                                                                                                    <br>
+                                                                                                                </div>
+                                                                                                                <div>En la página principal de GDAL podremos encontrar un listado de todas las opciones que nos permite manejar el comando. Detallamos a continuación algunas de las principales:</div>
+                                                                                                                <div>
+                                                                                                                    <div>
+                                                                                                                        <br>
+                                                                                                                    </div>
+                                                                                                                    <div>
+                                                                                                                        <b>-select &lt;lista de campos&gt;</b> lista separada por comas que indica la lista de campos de la capa de origen que se quiere exportar</div>
+                                                                                                                        <div>
+                                                                                                                            <b>-where &lt;condición&gt;</b> consulta a los datos de origen</div>
+                                                                                                                            <div>
+                                                                                                                                <b>-sql</b> posibilidad de insertar una consulta más compleja</div>
+                                                                                                                                <div>
+                                                                                                                                    <br>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                        </section>
+                                                                                                                        <section>
+                                                                                                                            <h2>ogr2ogr</h2>
+                                                                                                                            <div>
+                                                                                                                                <br>
+                                                                                                                            </div>
+                                                                                                                            <div>
+                                                                                                                                <span style="font-size: 36.47214889526367px; font-style: normal; font-variant: normal;">Otras opciones en referencia al formato de destino (las anteriores hacían referencia al de origen):</span>
+                                                                                                                                <br>
+                                                                                                                            </div>
+                                                                                                                            <div>
+                                                                                                                                <span style="font-size: 36.47214889526367px; font-style: normal; font-variant: normal;">
+                                                                                                                                    <br>
+                                                                                                                                </span>
+                                                                                                                            </div>
+                                                                                                                            <div>
+                                                                                                                                <span style="font-size: 36.47214889526367px; font-style: normal; font-variant: normal;">
+                                                                                                                                    <div>
+                                                                                                                                        <b>-f &lt;driver ogr&gt;</b> formato del fichero de salida</div>
+                                                                                                                                        <div>
+                                                                                                                                            <b>-lco VARIABLE=VALOR</b> Variables propias del driver de salida</div>
+                                                                                                                                            <div>
+                                                                                                                                                <b>-a_srs &lt;srid&gt;</b> asigna el SRID especificado a la capa de salida</div>
+                                                                                                                                                <div>
+                                                                                                                                                    <b>-t_srs &lt;srid&gt; </b>Reproyecta la capa de salida según el SRID especificado</div>
+                                                                                                                                                </span>
+                                                                                                                                            </div>
+                                                                                                                                        </section>
+                                                                                                                                        <section>
+                                                                                                                                            <h2>OSM</h2>
+                                                                                                                                            <div>
+                                                                                                                                                <br>
+                                                                                                                                            </div>
+                                                                                                                                            <div>
+                                                                                                                                                <br>
+                                                                                                                                            </div>
+                                                                                                                                            <div>
+                                                                                                                                                <div>OpenStreetMap (también conocido como OSM) es un proyecto colaborativo para crear mapas libres y editables.</div>
+                                                                                                                                                <div>Los mapas se crean utilizando información geográfica capturada con dispositivos GPS móviles, ortofotografías y otras fuentes libres. Esta cartografía, tanto las imágenes creadas como los datos vectoriales almacenados en su base de datos, se distribuye bajo licencia abierta Open Database Licence (ODbL).</div>
+                                                                                                                                            </div>
+                                                                                                                                        </section>
+                                                                                                                                        <section>
+                                                                                                                                            <h2>OSM</h2>
+                                                                                                                                            <div>
+                                                                                                                                                <br>
+                                                                                                                                            </div>
+                                                                                                                                            <div class="absolute-element" style="position: absolute; width: 968px; height: 553px; z-index: 4; left: 0px; top: 105px;">
+                                                                                                                                                <img src="img/osm.png">
+                                                                                                                                                <br>
+                                                                                                                                            </div>
+                                                                                                                                        </section>
+                                                                                                                                        <section>
+                                                                                                                                            <h2>OSM</h2>
+                                                                                                                                            <div>
+                                                                                                                                                <div>Diferente relaciones entre los datos:</div>
+                                                                                                                                                <div>
+                                                                                                                                                    <br>
+                                                                                                                                                </div>
+                                                                                                                                                <div style="text-align: left; ">
+                                                                                                                                                    <b>Node</b>: simplemente un punto</div>
+                                                                                                                                                    <div style="text-align: left; ">
+                                                                                                                                                        <b>Way</b>: una lista ordenada entre 2 y 20000 nodes&nbsp;<span>area = yes</span>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div style="text-align: left; ">
+                                                                                                                                                        <b>Relation</b>: lista ordenada de nodes o ways relaciondos entre ellos</div>
+                                                                                                                                                        <div style="text-align: left; ">
+                                                                                                                                                            <br>
+                                                                                                                                                        </div>
+                                                                                                                                                        <div style="text-align: center;">a diferencia de las geometrías características como:</div>
+                                                                                                                                                        <div style="text-align: center;">
+                                                                                                                                                            <br>
+                                                                                                                                                        </div>
+                                                                                                                                                        <div style="text-align: center;">Punto, Linea, Polígono</div>
+                                                                                                                                                    </div>
+                                                                                                                                                </section>
+                                                                                                                                                <section>
+                                                                                                                                                    <h2>osm</h2>
+                                                                                                                                                    <div>
+                                                                                                                                                        <br>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div>
+                                                                                                                                                        <br>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div>
+                                                                                                                                                        <br>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div>Una característica particular es la ausencia de polígonos dentro del modelo, estos se realizan mediante la asignación de una relación a una linea cerrada. Esta particularidad no impide que los datos de OSM puedan ser adaptados al modelo de geometrías normal mediante cargadores de datos OSM.&nbsp;<br>
+                                                                                                                                                    </div>
+                                                                                                                                                </section>
+                                                                                                                                                <section>
+                                                                                                                                                    <h2>osm2pgsql</h2>
+                                                                                                                                                    <div>
+                                                                                                                                                        <br>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div>
+                                                                                                                                                        <br>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div>
+                                                                                                                                                        <br>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div>
+                                                                                                                                                        <br>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div>No mantiene las relaciones entre las way y nodes, solo dibuja la linea como una MultiLinestring<br>
+                                                                                                                                                    </div>
+                                                                                                                                                </section>
+                                                                                                                                                <section>
+                                                                                                                                                    <h2>osm2pgsql</h2>
+                                                                                                                                                    <div>
+                                                                                                                                                        <br>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div>
+                                                                                                                                                        <br>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div>
+                                                                                                                                                        <div>Mediante el uso de este programa podremos incorporar en nuestra base de datos los datos obtenidos desde OSM. Una vez que hemos realizado la importación, aparecerán en nuestra base de datos las tablas que serán el resultado de esta importación:</div>
+                                                                                                                                                        <div>
+                                                                                                                                                            <br>
+                                                                                                                                                        </div>
+                                                                                                                                                        <div>planet_osm_point</div>
+                                                                                                                                                        <div>planet_osm_line</div>
+                                                                                                                                                        <div>planet_osm_polygon</div>
+                                                                                                                                                        <div>planet_osm_roads</div>
+                                                                                                                                                    </div>
+                                                                                                                                                </section>
+                                                                                                                                                <section>
+                                                                                                                                                    <h2>osm2pgsql</h2>
+                                                                                                                                                    <div>
+                                                                                                                                                        <br>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div>
+                                                                                                                                                        <br>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div>
+                                                                                                                                                        <br>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div>
+                                                                                                                                                        <br>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div>
+                                                                                                                                                        <div>$ osm2pgsql [opciones] ruta_fichero.osm otro_fichero.osm</div>
+                                                                                                                                                        <div>$ osm2pgsql [opciones] ruta_planet.[gz, bz2]</div>
+                                                                                                                                                    </div>
+                                                                                                                                                </section>
+                                                                                                                                                <section>
+                                                                                                                                                    <h2>comandos</h2>
+                                                                                                                                                    <div>
+                                                                                                                                                        <br>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div>
+                                                                                                                                                        <div style="text-align: left; ">
+                                                                                                                                                            <font style="font-size: 24px;">
+                                                                                                                                                                <b>-H</b> Servidor PostGIS</font>
+                                                                                                                                                            </div>
+                                                                                                                                                            <div style="text-align: left; ">
+                                                                                                                                                                <font style="font-size: 24px;">
+                                                                                                                                                                    <b>-P &lt;puerto&gt; </b>Puerto</font>
+                                                                                                                                                                </div>
+                                                                                                                                                                <div style="text-align: left; ">
+                                                                                                                                                                    <font style="font-size: 24px;">
+                                                                                                                                                                        <b>-U &lt;usuario&gt;</b> Usuario</font>
+                                                                                                                                                                    </div>
+                                                                                                                                                                    <div style="text-align: left; ">
+                                                                                                                                                                        <font style="font-size: 24px;">
+                                                                                                                                                                            <b>-W</b> pregunta la password del usuario</font>
+                                                                                                                                                                        </div>
+                                                                                                                                                                        <div style="text-align: left; ">
+                                                                                                                                                                            <font style="font-size: 24px;">
+                                                                                                                                                                                <b>-d &lt;base_de_datos&gt;</b> base de datos de destino</font>
+                                                                                                                                                                            </div>
+                                                                                                                                                                            <div style="text-align: left; ">
+                                                                                                                                                                                <font style="font-size: 24px;">
+                                                                                                                                                                                    <b>-a </b>añade datos a las tablas importadas anteriormente</font>
+                                                                                                                                                                                </div>
+                                                                                                                                                                                <div style="text-align: left; ">
+                                                                                                                                                                                    <font style="font-size: 24px;">
+                                                                                                                                                                                        <b>-l </b>almacena las coordenadas en latitud/longitug en lugar de Spherical Mercator</font>
+                                                                                                                                                                                    </div>
+                                                                                                                                                                                    <div style="text-align: left; ">
+                                                                                                                                                                                        <font style="font-size: 24px;">
+                                                                                                                                                                                            <b>-s</b> utiliza tablas secundarias para la importación en lugar de hacerlo en memoria</font>
+                                                                                                                                                                                        </div>
+                                                                                                                                                                                        <div style="text-align: left; ">
+                                                                                                                                                                                            <font style="font-size: 24px;">
+                                                                                                                                                                                                <b>-S &lt;fichero_de_estilos&gt;</b> ruta al fichero que indica las etiquetas de OSM que se quiere importar</font>
+                                                                                                                                                                                            </div>
+                                                                                                                                                                                            <div style="text-align: left; ">
+                                                                                                                                                                                                <font style="font-size: 24px;">
+                                                                                                                                                                                                    <font>
+                                                                                                                                                                                                        <b>-v </b>modo verborrea, muestra la sali</font>da de las operaciones por consola</font>
+                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                </div>
+                                                                                                                                                                                            </section>
+                                                                                                                                                                                            <section>
+                                                                                                                                                                                                <h2>osmosis</h2>
+                                                                                                                                                                                                <div>
+                                                                                                                                                                                                    <br>
+                                                                                                                                                                                                </div>
+                                                                                                                                                                                                <div>
+                                                                                                                                                                                                    <br>
+                                                                                                                                                                                                </div>
+                                                                                                                                                                                                <div>
+                                                                                                                                                                                                    <br>
+                                                                                                                                                                                                </div>
+                                                                                                                                                                                                <div>
+                                                                                                                                                                                                    <i>osmosis [opciones] file=ruta al fichero osm –write-pgsql database=nombre base de datos user=usuario password=contraseña</i>
+                                                                                                                                                                                                    <br>
+                                                                                                                                                                                                </div>
+                                                                                                                                                                                            </section>
+                                                                                                                                                                                            <section>
+                                                                                                                                                                                                <h2>osmosis</h2>
+                                                                                                                                                                                                <div>
+                                                                                                                                                                                                    <br>
+                                                                                                                                                                                                </div>
+                                                                                                                                                                                                <div>
+                                                                                                                                                                                                    <div style="text-align: left; ">
+                                                                                                                                                                                                        <b>user &lt;usuario&gt;</b> usuario</div>
+                                                                                                                                                                                                        <div style="text-align: left; ">
+                                                                                                                                                                                                            <b>host &lt;host&gt; </b>servidor</div>
+                                                                                                                                                                                                            <div style="text-align: left; ">
+                                                                                                                                                                                                                <b>password &lt;contraseña&gt;</b>
+                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                            <div style="text-align: left; ">
+                                                                                                                                                                                                                <b>database &lt;base de datos&gt;</b>
+                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                            <div style="text-align: left; ">
+                                                                                                                                                                                                                <br>
+                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                            <div style="text-align: left; ">
+                                                                                                                                                                                                                <b>--write-pgsql</b> Exporta los resultados a PostGIS</div>
+                                                                                                                                                                                                                <div style="text-align: left; ">
+                                                                                                                                                                                                                    <b>--truncate-pgsql</b> Elimina los registros de todas las tablas de osmosis</div>
+                                                                                                                                                                                                                    <div style="text-align: left; ">--read-pgsql Lee datos osmosis en PostGIS</div>
+                                                                                                                                                                                                                    <div style="text-align: left; ">
+                                                                                                                                                                                                                        <b>--read-xml</b> Establece como origen el formato xml de OSM</div>
+                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                </section>
+                                                                                                                                                                                                                <section>
+                                                                                                                                                                                                                    <h2>geoserver</h2>
+                                                                                                                                                                                                                    <div>
+                                                                                                                                                                                                                        <br>
+                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                    <div>
+                                                                                                                                                                                                                        <br>
+                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                    <div>
+                                                                                                                                                                                                                        <br>
+                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                    <div>
+                                                                                                                                                                                                                        <img src="img/GeoServer_Logo.png">
+                                                                                                                                                                                                                        
+                                                                                                                                                                                                                        <br>
+                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                </section>
+                                                                                                                                                                                                            </div>
+
+
+			<!-- Any section element between this container is displayed as a slide -->
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>			
