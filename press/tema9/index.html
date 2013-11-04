@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Tema 9 - Análisis Espacial</title>
+
+		<meta name="description" content="Curso de Bases de Datos Espaciales con PostGIS 2.0">
+		<meta name="author" content="geomati.co">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.min.css">
+		<link rel="stylesheet" href="../css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element between this containers is displayed as a slide -->
+			
+<div class="slides">
+    <section>
+        <h1>
+            <br>
+        </h1>
+        <h1>
+            <br>
+        </h1>
+        <h1>Análisis Espacial</h1>
+    </section>
+    <section>
+        <h2>Objetivos</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <span>Conocer la funcionalidad de análisis de PostGIS</span>
+            <br>
+        </div>
+        <div>
+            <div>Que el alumno entienda esta funcionalidad y adquiera capacidades para su uso</div>
+        </div>
+    </section>
+    <section>
+        <h2>Operaciones espaciales</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <div>Estas operaciones toman como argumento una o varias geometrías y devuelven otra geometría.</div>
+            <div>Están definidas en el estándar SFA.</div>
+            <div>Toman únicamente las coordenadas X e Y de las geometrías ignorando las Z o M</div>
+            <div>Ya existe alguna implementación de análisis que trabaja con estas coordenadas, pero todavía es mínima</div>
+            <div>Funcionan con todas las geometrías básicas excepto con las GEOMETRY COLLECION</div>
+        </div>
+    </section>
+    <section>
+        <section>
+            <h2>Buffer</h2>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <i>ST_Buffer(geom,distance,optional)</i>
+                <br>
+            </div>
+            <div>
+                <i>
+                <br>
+            </i>
+        </div>
+        <div>
+            <i>
+            <div>Es el conjunto de puntos situados a una determinada distancia de la geometría. La función acepta en su primer argumento una geometría y en el segundo la distancia con la que construirá la geometría de salida.</div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+        </i>
+    </div>
+</section>
+<section>
+    <h2>buffer</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <i style="font-size: 36.47214889526367px; font-variant: normal;">
+            <div>Un tercer parámetro opcional indicará:</div>
+            <div>El número de segmentos lineales</div>
+            <div>La terminación del buffer:</div>
+            <div>'endcap=round' (por defecto)&nbsp;</div>
+            <div>'endcap=flat'</div>
+            <div>'endcap=square'</div>
+        </i>
+    </div>
+</section>
+</section>
+<section>
+    <h2>Intersección</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <i>ST_Intersection(geom,geom)</i>
+        <br>
+    </div>
+    <div>
+        <i>
+        <br>
+    </i>
+</div>
+<div>
+    <i>
+    <br>
+</i>
+</div>
+<div>
+    <i>Genera una geometría a partir de la intersección de las geometrías que se les pasa como parámetros.<br>
+</i>
+</div>
+</section>
+<section>
+    <h2>unión</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>Al contrario que en el caso anterior, la unión produce un una geometría común con las geometrías que se le pasa a la función como argumento. Esta función acepta como parámetro dos opciones, las geometrías que serán unidas:</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i>ST_Union(Geometría A, Geometría B)</i>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>o una colección de geometrías:</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i>ST_Union([Geometry])</i>
+        </div>
+    </div>
+    <div>
+        <br>
+    </div>
+</section>
+<section>
+    <h2>diferencia</h2>
+    <div>
+        <br>
+    </div>
+    <div>ST_Diference(geom,geom)<br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>La diferencia entre dos geometrías A y B, son los puntos que pertenecen a A, pero no pertenecen a B<img src="img/st_difference.png" style="width: 543.5810914929566px; height: 285.52873539439776px; max-height: none; max-width: none;">
+        <br>
+    </div>
+</section>
+<section>
+    <h2>Diferencia simétrica</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <i>ST_SymDifference(geom,geom)</i>
+        <br>
+    </div>
+    <div>
+        <i>
+        <br>
+    </i>
+</div>
+<div>
+    <i>Es el conjunto de puntos que pertenecen a A o a B pero no a ambas.<br>
+</i>
+</div>
+<div>
+    <i>
+    <br>
+</i>
+</div>
+<div>
+    <img src="img/st_symdifference.png">
+    <i>
+    <br>
+</i>
+</div>
+</section>
+<section>
+    <h2>Convex Hull</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <i>ST_ConvexHull(geom,geom)</i>
+        <br>
+    </div>
+    <div>
+        <i>
+        <br>
+    </i>
+</div>
+<div>
+    <i>El polígono convexo más pequeño que contiene a la geometría<br>
+</i>
+</div>
+<div class="absolute-element" style="position: absolute; width: 442px; height: 340px; z-index: 4; left: 480px; top: 346px;">
+    <img src="img/ch_neighborhoods_convexhull.png">
+    <i>
+    <br>
+</i>
+</div>
+<div class="absolute-element" style="position: absolute; width: 442px; height: 340px; z-index: 4; left: 29px; top: 348px;">
+    <img src="img/ch_mbta_routes_convexhull.png">
+    <i>
+    <br>
+</i>
+</div>
+</section>
+<section>
+    <h2>Complejidad en el análisis</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>Uso intensivo de SQL para definir consultas eficaces y correctas</div>
+        <div>Estrategias de SQL avanzadas</div>
+        <div>Definición del problema y planificación de la consulta, diseño previo</div>
+        <div>¡Uso de índices espaciales!</div>
+    </div>
+    <div>
+        <br>
+    </div>
+</section>
+<section>
+    <h2>Tipos de geometrías devueltas</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>El tipo de geometrías que devuelven estas operaciones no tienen porque ser igual al tipo de geometrías que le son pasadas como argumentos. Estas operaciones devolverán:</div>
+        <div>
+            <br>
+        </div>
+        <div>Una única geometría</div>
+        <div>Una geometría Multi si está compuesta por varias geometrías del mismo tipo</div>
+        <div>Una GeometryCollection si está formada por geometrías de distinto tipo.</div>
+    </div>
+</section>
+<section>
+    <h2>Tipos de geometrías devueltas</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div style="text-align: center;">
+            <font style="font-size: 24px;">Podremos utilizar diferentes estrategias:</font>
+        </div>
+        <div style="text-align: left; ">
+            <font style="font-size: 24px;">
+                <br>
+            </font>
+        </div>
+        <div style="text-align: left; ">
+            <font style="font-size: 24px;">El uso de clausulas de filtrado, por ejemplo indicando que solo se devuelvan aquellas geometrías cuya intersección sea una línea.</font>
+        </div>
+        <div style="text-align: left; ">
+            <font style="font-size: 24px;">Crear las tablas de salida de tipo Multi, en este caso las geometrías que no sean multi podrán ser convertidas a este tipo mediante la función ST_Multi</font>
+        </div>
+        <div style="text-align: left; ">
+            <font style="font-size: 24px;">En caso de que las geometrías devueltas sean tipo GeometryCollection, será necesario iterar esta colección, y extraer mediante la función ST_CollectionExtract las geometrías en las que estamos interesados, indicandole para ello a la función la dimensión de las geometrías.</font>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>Transformación de coordenadas</h2>
+    <div>
+        <br>
+    </div>
+    <div>PostGIS dispone de funciones para la transformación de geometrías:<br>
+    </div>
+    <div>
+        <div style="text-align: left; ">Rotación:</div>
+        <div>
+            <i>
+            <span class="Apple-tab-span" style="white-space:pre">	</span>ST_RotateX(geom,ang)</i>
+        </div>
+        <div>
+            <i>
+            <span class="Apple-tab-span" style="white-space:pre">	</span>ST_RotateY(geom,ang)</i>
+        </div>
+        <div style="text-align: left; ">Escalado:</div>
+        <div>
+            <i>
+            <span class="Apple-tab-span" style="white-space:pre">	</span>ST_Scale(geom, factorX, factorY)</i>
+        </div>
+        <div style="text-align: left; ">Translación</div>
+        <div>
+            <i>
+            <span class="Apple-tab-span" style="white-space:pre">	</span>ST_Translate(geom, incrementoX, incrementoY)</i>
+        </div>
+        <div style="text-align: left; ">Escalado y translación</div>
+        <div style="text-align: center;">
+            <i>
+            <span class="Apple-tab-span" style="white-space:pre">	</span>ST_TransScale(geom, incrX, incrY, factorX, factorY)</i>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>Proyecciones</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>PostGIS soporta varios <b>miles</b> de sistemas de coordenadas.&nbsp;</div>
+        <div>La gestión&nbsp;<span>de los Sistemas de coordenadas se realiza con las siguientes funciones:</span>
+    </div>
+</div>
+<div>
+    <br>
+</div>
+<div>
+    <div style="text-align: left; ">
+        <i>ST_Srid(geom)</i> → devuelve el CRS de la geometría</div>
+        <div style="text-align: left; ">
+            <i>ST_SetSrid(geom,srid) </i>→ devuelve la geometría con el nuevo CRS asignado</div>
+            <div style="text-align: left; ">
+                <i>ST_Transform(geom, srid) </i>→ devuelve la geometría reproyectada&nbsp;</div>
+            </div>
+        </section>
+        <section>
+            <h2>Proyecciones</h2>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <i>ST_SetSRID</i> asigna un nuevo sistema de coordenadas, pero mantiene las coordenadas sin modificar, mientras que <i>ST_Transform </i>modifica las coordenadas transformando la geometría al nuevo sistema de coordenadas.<br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>Los operadores espaciales de PostGIS que utilizan dos o más geometrías necesitan que estas dispongan del mismo sistema de coordenadas.<br>
+            </div>
+        </section>
+        <section>
+            <h2>Cambio de CRS a una capa</h2>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <div>En caso de que necesitemos cambiar el CRS a una capa por completo no será necesario recorrer todos los registros, podremos utilizar la función:</div>
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <i>UpdateGeometrySrid(tabla, columna geom, nuevo SRID)</i>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div>¡No reproyecta los datos!</div>
+            </div>
+        </section>
+        <section>
+            <h2>Reproyección de una capa</h2>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div>Para reproyectar las geometrías de una capa utilizaremos <i>ST_Transform</i>. Para poder hacer esta operación, hemos de eliminar la restricción sobre el SRID antes de actualizar las geometrías.&nbsp;<br>
+            </div>
+        </section>
+    </div>
+
+			<!-- Any section element between this container is displayed as a slide -->
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>			
