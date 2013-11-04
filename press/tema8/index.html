@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Tema 1 - Teoría de Bases de Datos</title>
+
+		<meta name="description" content="Curso de Bases de Datos Espaciales con PostGIS 2.0">
+		<meta name="author" content="geomati.co">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.min.css">
+		<link rel="stylesheet" href="../css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element between this containers is displayed as a slide -->
+<div class="slides">
+    <section>
+        <h1>
+            <br>
+        </h1>
+        <h1>
+            <span style="font-size: 135.72px;">Relaciones Espaciales</span>
+            <br>
+        </h1>
+    </section>
+    <section>
+        <h2>Objetivos</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <div>Conocer la definición de las relaciones espaciales de SFA</div>
+            <div>Manejas las relaciones espaciales en PostGIS</div>
+        </div>
+    </section>
+    <section>
+        <h2>Relaciones espaciales</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Verifican el cumplimiento de determinados predicados geográficos entre dos geometrías distintas. Los predicados geográficos toman dos geometrías como argumento, y devuelven un valor booleano que indica si ambas geometrías cumplen o no una determinada relación espacial.<br>
+        </div>
+    </section>
+    <section>
+        <h2>relaciones espaciales</h2>
+        <div>
+            <br>
+        </div>
+        <div>Las principales relaciones espaciales contempladas son:&nbsp;</div>
+        <div>
+            <div>equals&nbsp;</div>
+            <div>disjoint&nbsp;</div>
+            <div>intersects&nbsp;</div>
+            <div>touches&nbsp;</div>
+            <div>crosses&nbsp;</div>
+            <div>within&nbsp;</div>
+            <div>contains&nbsp;</div>
+            <div>overlaps</div>
+        </div>
+    </section>
+    <section>
+        <h2>Matriz DE-9IM</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <div>&nbsp;El DE-9IM es un enfoque matemático que define la relación espacial entre&nbsp;</div>
+            <div>un par de geometrías de diferentes tipos y dimensiones.</div>
+        </div>
+    </section>
+    <section>
+        <h2>Matriz DE-9IM</h2>
+        <div>
+            <br>
+        </div>
+        <div class="absolute-element" style="position: absolute; width: 655px; height: 519px; z-index: 4; left: 162px; top: 126px;">
+            <img src="img/md9im.png" style="width: 615.0140433088166px; height: 480.89831983294766px; max-height: none; max-width: none;">
+            <br>
+        </div>
+    </section>
+    <section>
+        <h2>jts test builder</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Permite editar y/o crear de forma gráfica y aplicar diferentes operadores espaciales viendo también de forma gráfica también los resultados<br>
+        </div>
+    </section>
+    <section>
+        <h2>matriz de-9im</h2>
+        <div>
+            <br>
+        </div>
+        <div>Reglas:</div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <div>Los valores de las celdas podrán ser:</div>
+            <div>
+                <br>
+            </div>
+            <div>0,1,2 valor de la dimensión</div>
+            <div>F el conjunto vacio</div>
+        </div>
+    </section>
+    <section>
+        <h2>matriz de-9im</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Se trata de encontrar las posibles dimensiones de las geometrías. Estás construcciones responden a un patrón en función de la relación que cumplan<br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Se muestran las relaciones de AB y BA<br>
+        </div>
+    </section>
+    <section>
+        <h2>matriz de-9im</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>PostGIS permite el uso de estos patrones mediante la función<br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>&nbsp;<i>ST_Relate(geom, geom, patron)</i>
+        <br>
+    </div>
+</section>
+<section>
+    <h2>st_relate</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>ST_Relate me permite el uso de patrones personalizados:</div>
+        <div>
+            <br>
+        </div>
+        <div>T puede ser igual a 0,1,2</div>
+        <div>* puede ser igual a 0,1,2 o F&nbsp;</div>
+    </div>
+</section>
+<section>
+    <h2>st_Relate</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>El patrón <b>T********</b> me indica que los interiores de las geometrías tienen que tener alguna dimensión, por lo tanto deben intersecar<br>
+    </div>
+</section>
+<section>
+    <section>
+        <h2>relaciones espaciales</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <div>Mediante el uso de ST_Relate y los patrones podemos encontrar las relaciones de las geometrías. Es tedioso el uso de los patrones.&nbsp;</div>
+            <div>PostGIS define operaciones que son particularizaciones del uso de los patrones.</div>
+            <div>Estas operaciones deben cumplir la definición de la relación impuesta por los estándares</div>
+        </div>
+    </section>
+    <section>
+        <h2>equals</h2>
+        <div>
+            <br>
+        </div>
+        <div>Las geometrías son iguales desde un punto de vista topológico, es decir si su contorno, interior y exterior son iguales, sin tener en cuenta el número de vertices, ni el sentido ni como están compuestos los elementos incluso si se tratan de geometrías multi<br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i>ST_Equals(geom, geom)</i>
+            <br>
+        </div>
+    </section>
+</section>
+<section>
+    <section>
+        <h2>equals</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div class="absolute-element" style="position: absolute; width: 547px; height: 545px; z-index: 4; left: 211px; top: 123px;">
+            <img src="img/st_equals.png">
+            <br>
+        </div>
+    </section>
+    <section>
+        <h2>Disjoint</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Las geometrías no tendrán ningún punto en común<br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i>ST_Disjoint(geom, geom)</i>
+            <br>
+        </div>
+    </section>
+</section>
+<section>
+    <section>
+        <h2>disjoint</h2>
+        <div>
+            <br>
+        </div>
+        <div class="absolute-element" style="position: absolute; width: 547px; height: 595px; z-index: 4; left: 205px; top: 99px;">
+            <img src="img/st_disjoint.png">
+            <br>
+        </div>
+    </section>
+    <section>
+        <h2>Intersects</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Opuesto del anterior, indica que las geometrías tiene algún punto en común<br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i>ST_Intersects(geom, geom)</i>
+            <br>
+        </div>
+    </section>
+</section>
+<section>
+    <section>
+        <h2>intersects</h2>
+        <div>
+            <br>
+        </div>
+        <div class="absolute-element" style="position: absolute; width: 547px; height: 595px; z-index: 4; left: 196px; top: 98px;">
+            <img src="img/st_intersects.png">
+            <br>
+        </div>
+    </section>
+    <section>
+        <h2>touches</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Devuelve <b>TRUE</b> si cualquiera de los contornos de las geometrías se cruzan o si sólo uno de los interiores de la geometría se cruza el contorno del otro.<br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i>ST_Touches(geom, geom)</i>
+            <br>
+        </div>
+    </section>
+</section>
+<section>
+    <section>
+        <h2>touches</h2>
+        <div>
+            <br>
+        </div>
+        <div class="absolute-element" style="position: absolute; width: 547px; height: 545px; z-index: 4; left: 211px; top: 127px;">
+            <img src="img/st_touches.png">
+            <br>
+        </div>
+    </section>
+    <section>
+        <h2>Crosses</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Se cumple esta relación si el resultado de la intersección de dos geometrías es de dimensión menor que la mayor de las dimensiones de las dos geometrías y además esta intersección está en el interior de ambas.<br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i>ST_Crosses(geom, geom)</i>
+            <br>
+        </div>
+    </section>
+</section>
+<section>
+    <section>
+        <h2>Crosses</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <img src="img/st_crosses.png">
+            <br>
+        </div>
+    </section>
+    <section>
+        <h2>Overlaps</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Compara dos geometrías de la misma dimensión y devuelve TRUE si su intersección resulta una geometría diferente de ambas pero de la misma dimensión<br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i>ST_Overlaps(geom, geom)</i>
+            <br>
+        </div>
+    </section>
+</section>
+<section>
+    <section>
+        <h2>Overlaps</h2>
+        <div>
+            <br>
+        </div>
+        <div class="absolute-element" style="position: absolute; width: 547px; height: 545px; z-index: 4; left: 212px; top: 116px;">
+            <img src="img/st_overlaps.png">
+            <br>
+        </div>
+    </section>
+    <section>
+        <h2>Within</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Se cumple si la geometría A está completamente dentro de la geometría B.<br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i>ST_Within(geom A, geom B)</i>
+            <br>
+        </div>
+    </section>
+</section>
+<section>
+    <h2>Contains</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>Se cumple si la geometría A está contenida completamente dentro de la geometría B.<br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <i>ST_Contains(geom A, geom B)</i>
+        <br>
+    </div>
+</section>
+<section>
+    <section>
+        <h2>Within</h2>
+        <div>
+            <br>
+        </div>
+        <div class="absolute-element" style="position: absolute; width: 547px; height: 595px; z-index: 4; left: 194px; top: 103px;">
+            <img src="img/st_within.png">
+            <br>
+        </div>
+    </section>
+    <section>
+        <h2>Covers y CoveredBy</h2>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>Estas al igual que las anteriores son opuestas:<br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div>
+            <i>ST_Covers(geom A, geom B) = ST_CoveredBy(geom B, geom A)</i>
+            <br>
+        </div>
+    </section>
+</section>
+<section>
+    <h2>Covers y CoveredBy</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>Devuelve verdadero en el caso de que una geometría se encuentra completamente contenida en la otra, ningún punto debe caer en el exterior, pudiendo estar en el interior o en el contorno o en ambos.</div>
+        <div>
+            <br>
+        </div>
+        <div>En el caso anterior, si la geometría caé en el contorno los predicados devolverán falso. (Estos últimos son los que pertenecen al estandar OGC)</div>
+    </div>
+</section>
+<section>
+    <h2>Spatial JOIN</h2>
+    <div>
+        <br>
+    </div>
+    <div>Permite combinar información de diferentes tablas usando relaciones espaciales como clave dentro del JOIN.<br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <div>
+            <i># SELECT campos</i>
+        </div>
+        <div>
+            <i>FROM tabla as a</i>
+        </div>
+        <div>
+            <i>JOIN otra_tabla as b</i>
+        </div>
+        <div>
+            <i>ON ST_Contains(a.geom, b.geom)</i>
+        </div>
+        <div>
+            <i>WHERE condiciones;</i>
+        </div>
+    </div>
+</section>
+</div>
+			
+
+			<!-- Any section element between this container is displayed as a slide -->
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>			
